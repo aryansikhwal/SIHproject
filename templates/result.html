@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    {% if status == 'success' %}
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h2 class="text-center mb-4">Attendance Forecast Results</h2>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="stats-card text-center">
+                    <h4 class="text-primary mb-3">Average</h4>
+                    <h3>{{ stats.average }}</h3>
+                    <p class="text-muted">Expected daily attendance</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card text-center">
+                    <h4 class="text-success mb-3">Maximum</h4>
+                    <h3>{{ stats.maximum }}</h3>
+                    <p class="text-muted">Peak attendance</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card text-center">
+                    <h4 class="text-warning mb-3">Minimum</h4>
+                    <h3>{{ stats.minimum }}</h3>
+                    <p class="text-muted">Lowest expected attendance</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forecast Plot -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Attendance Forecast</h5>
+                        <img src="{{ url_for('static', filename=plot_path.split('/')[-1]) }}" 
+                             class="img-fluid rounded" 
+                             alt="Attendance Forecast Plot">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trends Plot (if available) -->
+        {% if trends_path %}
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Attendance Trends</h5>
+                        <img src="{{ url_for('static', filename=trends_path.split('/')[-1]) }}"
+                             class="img-fluid rounded"
+                             alt="Attendance Trends Plot">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Download Section -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a href="{{ url_for('download_file', filename=csv_path.split('/')[-1]) }}" 
+                   class="btn btn-primary me-2">
+                    Download Forecast Data (CSV)
+                </a>
+                <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
+                    Generate New Forecast
+                </a>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card border-danger">
+                    <div class="card-body text-center">
+                        <h3 class="text-danger mb-3">Error Generating Forecast</h3>
+                        <p class="mb-4">{{ message }}</p>
+                        <a href="{{ url_for('home') }}" class="btn btn-primary">
+                            Try Again
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
