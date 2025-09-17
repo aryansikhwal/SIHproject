@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, send_file, jsonify, flash, redirect, url_for, session
+from flask import Flask, render_template, request, send_file, jsonify, flash, redirect, url_for, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
 import os
 from datetime import datetime, date
 import pandas as pd
@@ -10,11 +11,27 @@ from model import generate_forecast
 import json
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='static')
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+CORS(app, resources={r"/api/*": {
+    "origins": "http://localhost:5000",
+    "supports_credentials": True
+}})  # Allow React frontend access with credentials
+
+# Additional static folder for nested static files
+app.static_folder = 'static'
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(os.path.join(app.static_folder, 'static'), filename)
 app.config['SECRET_KEY'] = 'your-secret-key-here'  # Change this in production
 
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:your_password@localhost/attendance_system"
+basedir = os.path.abspath(os.path.dirname(__file__))
+instance_path = os.path.join(basedir, 'instance')
+if not os.path.exists(instance_path):
+    os.makedirs(instance_path)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(instance_path, 'attendance_system.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -138,8 +155,70 @@ def validate_csv(file_path):
     except Exception as e:
         return False, f"Error validating CSV: {str(e)}"
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/api/auth/login', methods=['POST'])
+def api_login():
+    try:
+        data = request.json
+        print(f"Login attempt with data: {data}")
+        
+        if not data:
+            print("No JSON data received")
+            return jsonify({
+                'success': False,
+                'message': 'No data provided'
+            }), 400
+        
+        username = data.get('username')
+        password = data.get('password')
+        
+        if not username or not password:
+            print("Missing username or password")
+            return jsonify({
+                'success': False,
+                'message': 'Username and password are required'
+            }), 400
+        
+        print(f"Looking up user: {username}")
+        user = User.query.filter_by(username=username).first()
+        
+        if not user:
+            print(f"User not found: {username}")
+            return jsonify({
+                'success': False,
+                'message': 'Invalid username or password'
+            }), 401
+        
+        print("Checking password...")
+        if check_password_hash(user.password_hash, password):
+            print("Password correct, logging in user...")
+            login_user(user)
+            return jsonify({
+                'success': True,
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'full_name': user.full_name,
+                    'email': user.email,
+                    'role': user.role
+                },
+                'token': 'dummy-jwt-token'  # In production, generate a real JWT token
+            })
+        
+        print("Password incorrect")
+        return jsonify({
+            'success': False,
+            'message': 'Invalid username or password'
+        }), 401
+        
+    except Exception as e:
+        print(f"Error during login: {str(e)}")
+        return jsonify({
+            'success': False,
+            'message': 'An error occurred during login'
+        }), 500
+
+@app.route('/login', methods=['GET', 'POST'])  # Keep the template route for backward compatibility
+def login_page():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -159,9 +238,39 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/')
-@login_required
-def dashboard():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react(path):
+    if path.startswith('api/'):
+        return {"error": "Not Found"}, 404
+    
+    # First try to serve the path as a static file
+    static_file = os.path.join(app.static_folder, path)
+    if os.path.exists(static_file) and os.path.isfile(static_file):
+        return send_from_directory(app.static_folder, path)
+    
+    # If not found, serve index.html for client-side routing
+    return send_from_directory(app.static_folder, 'index.html')
+
+# Add explicit handlers for common static files
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(app.static_folder, 'favicon.ico')
+
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory(app.static_folder, 'manifest.json')
+
+@app.route('/logo192.png')
+def logo192():
+    return send_from_directory(app.static_folder, 'logo192.png')
+
+@app.route('/logo512.png')
+def logo512():
+    return send_from_directory(app.static_folder, 'logo512.png')
+
+@app.route('/api/dashboard')
+def get_dashboard_data():
     # Get today's date
     today = date.today()
     
@@ -186,15 +295,57 @@ def dashboard():
         AttendanceSession.created_at.desc()
     ).limit(5).all()
     
-    return render_template('index.html',
-                         total_students=total_students,
-                         present_today=present_today,
-                         weekly_data=weekly_data,
-                         recent_activity=recent_activity)
+    return jsonify({
+        'statistics': {
+            'total_students': total_students,
+            'present_today': present_today,
+            'attendance_rate': (present_today / total_students * 100) if total_students > 0 else 0
+        },
+        'weekly_data': [{
+            'date': data[0].strftime('%Y-%m-%d'),
+            'count': data[1]
+        } for data in weekly_data],
+        'recent_activity': [{
+            'id': activity.id,
+            'class_id': activity.class_id,
+            'date': activity.session_date.strftime('%Y-%m-%d'),
+            'time': activity.session_time.strftime('%H:%M:%S'),
+            'total_detected': activity.total_students_detected,
+            'total_recognized': activity.total_students_recognized,
+            'status': activity.processing_status
+        } for activity in recent_activity]
+    })
 
-@app.route('/attendance')
-@login_required
-def attendance():
+@app.route('/api/attendance')
+def get_attendance():
+    class_id = request.args.get('class')
+    date_str = request.args.get('date', date.today().strftime('%Y-%m-%d'))
+    
+    attendance_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+    
+    # Get attendance records
+    records = Attendance.query.filter(
+        Attendance.class_id == class_id,
+        Attendance.attendance_date == attendance_date
+    ).all()
+    
+    # Format response
+    attendance_data = [{
+        'student_id': record.student_id,
+        'status': record.status,
+        'time_marked': record.time_marked.isoformat(),
+        'method': record.method,
+        'is_verified': record.is_verified
+    } for record in records]
+    
+    return jsonify({
+        'date': date_str,
+        'class_id': class_id,
+        'records': attendance_data
+    })
+
+@app.route('/attendance')  # Keep the template route for backward compatibility
+def attendance_page():
     class_id = request.args.get('class_id')
     date_str = request.args.get('date', date.today().strftime('%Y-%m-%d'))
     
@@ -218,8 +369,7 @@ def attendance():
                          selected_date=date_str,
                          attendance_records=attendance_records)
 
-@app.route('/mark_attendance', methods=['POST'])
-@login_required
+@app.route('/api/attendance', methods=['POST'])
 def mark_attendance():
     data = request.json
     student_id = data.get('student_id')
@@ -249,7 +399,7 @@ def mark_attendance():
         db.session.add(attendance)
     
     db.session.commit()
-    return jsonify({'success': True})
+    return jsonify({'success': True, 'message': 'Attendance marked successfully'})
 
 @app.route('/upload_attendance', methods=['POST'])
 @login_required
@@ -297,9 +447,33 @@ def download_file(filename):
         return redirect(url_for('home'))
 
 # API Endpoints
-@app.route('/students')
+@app.route('/api/students')
+def get_students():
+    class_id = request.args.get('class')
+    search_term = request.args.get('search')
+    
+    query = Student.query
+    if class_id and class_id != 'all':
+        query = query.filter_by(class_id=class_id)
+    if search_term:
+        query = query.filter(Student.full_name.ilike(f'%{search_term}%'))
+    
+    students = query.all()
+    return jsonify([{
+        'id': student.id,
+        'student_id': student.student_id,
+        'full_name': student.full_name,
+        'class_id': student.class_id,
+        'roll_number': student.roll_number,
+        'father_name': student.father_name,
+        'mother_name': student.mother_name,
+        'phone': student.phone,
+        'is_active': student.is_active
+    } for student in students])
+
+@app.route('/students')  # Keep the template route for backward compatibility
 @login_required
-def students():
+def students_page():
     students = Student.query.all()
     classes = Class.query.all()
     return render_template('students.html', students=students, classes=classes)
@@ -482,5 +656,35 @@ def not_found_error(error):
 def internal_error(error):
     return render_template('500.html'), 500
 
+# Initialize database and create admin user
+def init_db():
+    with app.app_context():
+        try:
+            print("Creating database tables...")
+            db.create_all()
+            print("Database tables created successfully")
+
+            print("Checking for admin user...")
+            admin = User.query.filter_by(username='admin').first()
+            if not admin:
+                print("Creating admin user...")
+                admin = User(
+                    username='admin',
+                    password_hash=generate_password_hash('admin123'),
+                    full_name='Administrator',
+                    email='admin@attensync.com',
+                    role='principal'
+                )
+                db.session.add(admin)
+                db.session.commit()
+                print("Created admin user successfully")
+            else:
+                print("Admin user already exists")
+        except Exception as e:
+            print(f"Error during database initialization: {str(e)}")
+            db.session.rollback()
+            raise  # Re-raise the exception to see the full error
+
 if __name__ == '__main__':
+    init_db()
     app.run(debug=True, host='0.0.0.0', port=5000)
