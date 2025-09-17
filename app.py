@@ -89,6 +89,7 @@ class Student(db.Model):
     face_encoding = db.Column(db.Text)  # JSON string
     photo_filename = db.Column(db.String(255))
     qr_code = db.Column(db.Text)  # JSON string
+    rfid_tag = db.Column(db.String(50), unique=True)  # RFID tag number
     enrollment_date = db.Column(db.Date, nullable=False)
     is_active = db.Column(db.Boolean, default=True)
     consent_given = db.Column(db.Boolean, default=False)
@@ -105,7 +106,7 @@ class Attendance(db.Model):
     attendance_date = db.Column(db.Date, nullable=False)
     time_marked = db.Column(db.DateTime, default=datetime.utcnow)
     status = db.Column(db.Enum('present', 'absent'), default='present')
-    method = db.Column(db.Enum('face_recognition', 'qr_code', 'manual'), nullable=False)
+    method = db.Column(db.Enum('face_recognition', 'qr_code', 'manual', 'rfid'), nullable=False)
     confidence_score = db.Column(db.Numeric(5, 3))
     photo_filename = db.Column(db.String(255))
     notes = db.Column(db.Text)
