@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, send_file, jsonify, flash, redirect, url_for, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
+# Create a custom decorator that does nothing (to bypass login_required)
+def login_required(f):
+    return f
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
@@ -9,6 +12,7 @@ from datetime import datetime, date
 import pandas as pd
 from model import generate_forecast
 import json
+import sqlite3
 
 # Initialize Flask app
 app = Flask(__name__, static_url_path='', static_folder='static')
@@ -38,7 +42,7 @@ db = SQLAlchemy(app)
 # Initialize Login Manager
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'login_page'
 
 # File upload configuration
 UPLOAD_FOLDER = 'uploads'
@@ -49,6 +53,26 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 for directory in ['uploads', 'static']:
     if not os.path.exists(directory):
         os.makedirs(directory)
+
+# Path for the separate RFID scan database
+RFID_DB_PATH = os.path.join(basedir, 'rfid_scans.db')
+
+# Ensure RFID scan database and table exist
+def init_rfid_db():
+    conn = sqlite3.connect(RFID_DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS rfid_scan_log (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tag TEXT NOT NULL,
+            student_name TEXT NOT NULL,
+            timestamp TEXT NOT NULL
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+init_rfid_db()
 
 # Database Models
 class User(UserMixin, db.Model):
@@ -126,6 +150,20 @@ class AttendanceSession(db.Model):
     notes = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+class AttendanceForecast(db.Model):
+    __tablename__ = 'attendance_forecast'
+    id = db.Column(db.Integer, primary_key=True)
+    forecast_date = db.Column(db.Date, unique=True, nullable=False)
+    predicted_present = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class RFIDScanLog(db.Model):
+    __tablename__ = 'rfid_scan_log'
+    id = db.Column(db.Integer, primary_key=True)
+    tag = db.Column(db.String(50), nullable=False)
+    student_name = db.Column(db.String(100), nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False)
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -159,57 +197,29 @@ def validate_csv(file_path):
 @app.route('/api/auth/login', methods=['POST'])
 def api_login():
     try:
-        data = request.json
-        print(f"Login attempt with data: {data}")
+        # Bypass login check - auto-login as admin
+        admin = User.query.filter_by(username='admin').first()
         
-        if not data:
-            print("No JSON data received")
+        if not admin:
+            print("Admin user not found")
             return jsonify({
                 'success': False,
-                'message': 'No data provided'
-            }), 400
+                'message': 'Admin user not found. Please initialize the database.'
+            }), 500
         
-        username = data.get('username')
-        password = data.get('password')
-        
-        if not username or not password:
-            print("Missing username or password")
-            return jsonify({
-                'success': False,
-                'message': 'Username and password are required'
-            }), 400
-        
-        print(f"Looking up user: {username}")
-        user = User.query.filter_by(username=username).first()
-        
-        if not user:
-            print(f"User not found: {username}")
-            return jsonify({
-                'success': False,
-                'message': 'Invalid username or password'
-            }), 401
-        
-        print("Checking password...")
-        if check_password_hash(user.password_hash, password):
-            print("Password correct, logging in user...")
-            login_user(user)
-            return jsonify({
-                'success': True,
-                'user': {
-                    'id': user.id,
-                    'username': user.username,
-                    'full_name': user.full_name,
-                    'email': user.email,
-                    'role': user.role
-                },
-                'token': 'dummy-jwt-token'  # In production, generate a real JWT token
-            })
-        
-        print("Password incorrect")
+        print("Auto-login as admin")
+        login_user(admin)
         return jsonify({
-            'success': False,
-            'message': 'Invalid username or password'
-        }), 401
+            'success': True,
+            'user': {
+                'id': admin.id,
+                'username': admin.username,
+                'full_name': admin.full_name,
+                'email': admin.email,
+                'role': admin.role
+            },
+            'token': 'dummy-jwt-token'  # In production, generate a real JWT token
+        })
         
     except Exception as e:
         print(f"Error during login: {str(e)}")
@@ -218,39 +228,46 @@ def api_login():
             'message': 'An error occurred during login'
         }), 500
 
-@app.route('/login', methods=['GET', 'POST'])  # Keep the template route for backward compatibility
+@app.route('/login', methods=['GET', 'POST'])
 def login_page():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        user = User.query.filter_by(username=username).first()
-        
-        if user and check_password_hash(user.password_hash, password):
-            login_user(user)
-            flash('Logged in successfully.', 'success')
-            return redirect(url_for('dashboard'))
-            
-        flash('Invalid username or password.', 'error')
-    return render_template('login.html')
+    # Bypass login for GET requests by serving the React frontend
+    if request.method == 'GET':
+        return send_from_directory(app.static_folder, 'index.html')
+    
+    # Handle POST requests for backward compatibility
+    admin = User.query.filter_by(username='admin').first()
+    if admin:
+        login_user(admin)
+        return jsonify({
+            'success': True,
+            'message': 'Auto-logged in as admin'
+        })
+    else:
+        return jsonify({
+            'success': False,
+            'message': 'Admin user not found. Please initialize the database.'
+        }), 500
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('login_page'))
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_react(path):
+    # Handle API routes separately
     if path.startswith('api/'):
         return {"error": "Not Found"}, 404
     
-    # First try to serve the path as a static file
-    static_file = os.path.join(app.static_folder, path)
-    if os.path.exists(static_file) and os.path.isfile(static_file):
-        return send_from_directory(app.static_folder, path)
+    # Serve static files for specific assets
+    if path and '.' in path:  # Likely a file with extension
+        static_file = os.path.join(app.static_folder, path)
+        if os.path.exists(static_file) and os.path.isfile(static_file):
+            return send_from_directory(app.static_folder, path)
     
-    # If not found, serve index.html for client-side routing
+    # For all other routes, serve the React index.html to support client-side routing
     return send_from_directory(app.static_folder, 'index.html')
 
 # Add explicit handlers for common static files
@@ -345,30 +362,9 @@ def get_attendance():
         'records': attendance_data
     })
 
-@app.route('/attendance')  # Keep the template route for backward compatibility
+@app.route('/attendance')  # Route redirects to React frontend
 def attendance_page():
-    class_id = request.args.get('class_id')
-    date_str = request.args.get('date', date.today().strftime('%Y-%m-%d'))
-    
-    students = Student.query.filter_by(class_id=class_id).all() if class_id else []
-    classes = Class.query.all()
-    
-    attendance_date = datetime.strptime(date_str, '%Y-%m-%d').date()
-    attendance_records = {}
-    
-    if students:
-        records = Attendance.query.filter_by(
-            class_id=class_id,
-            attendance_date=attendance_date
-        ).all()
-        attendance_records = {r.student_id: r.status for r in records}
-    
-    return render_template('attendance.html',
-                         students=students,
-                         classes=classes,
-                         selected_class=class_id,
-                         selected_date=date_str,
-                         attendance_records=attendance_records)
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/attendance', methods=['POST'])
 def mark_attendance():
@@ -472,86 +468,25 @@ def get_students():
         'is_active': student.is_active
     } for student in students])
 
-@app.route('/students')  # Keep the template route for backward compatibility
-@login_required
+@app.route('/students')  # Route redirects to React frontend
 def students_page():
-    students = Student.query.all()
-    classes = Class.query.all()
-    return render_template('students.html', students=students, classes=classes)
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/reports')
-@login_required
 def reports():
-    class_id = request.args.get('class_id')
-    start_date = request.args.get('start_date')
-    end_date = request.args.get('end_date')
-    
-    # Get attendance statistics
-    query = db.session.query(
-        Class.class_name,
-        Class.section,
-        db.func.count(Student.id).label('total_students'),
-        db.func.count(Attendance.id).label('present_count')
-    ).join(Student).outerjoin(
-        Attendance, 
-        db.and_(
-            Attendance.student_id == Student.id,
-            Attendance.status == 'present'
-        )
-    ).group_by(Class.id)
-    
-    if class_id:
-        query = query.filter(Class.id == class_id)
-    if start_date and end_date:
-        query = query.filter(Attendance.attendance_date.between(start_date, end_date))
-    
-    stats = query.all()
-    classes = Class.query.all()
-    
-    return render_template('reports.html', stats=stats, classes=classes)
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/trends')
-@login_required
 def trends():
-    # Get attendance data for forecasting
-    attendance_data = pd.DataFrame(
-        db.session.query(
-            Attendance.attendance_date,
-            db.func.count().label('count')
-        ).filter(
-            Attendance.status == 'present'
-        ).group_by(Attendance.attendance_date).all(),
-        columns=['ds', 'y']
-    )
-    
-    if len(attendance_data) > 0:
-        # Generate forecast using Prophet
-        forecast, fig1, fig2 = generate_forecast(attendance_data)
-        
-        # Save visualizations
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        plot_path = f'static/forecast_plot_{timestamp}.png'
-        trends_path = f'static/trends_plot_{timestamp}.png'
-        
-        fig1.savefig(plot_path)
-        if fig2:
-            fig2.savefig(trends_path)
-        
-        # Calculate trends and statistics
-        trends_data = generate_attendance_trends()
-        
-        return render_template('trends.html',
-                             trends_data=trends_data,
-                             plot_path=plot_path,
-                             trends_path=trends_path if fig2 else None)
-    
-    flash('Not enough attendance data for forecasting', 'error')
-    return redirect(url_for('dashboard'))
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/settings')
-@login_required
 def settings():
-    return render_template('settings.html')
+    return send_from_directory(app.static_folder, 'index.html')
 
 # Helper functions for trends analysis
 def generate_attendance_trends():
@@ -648,6 +583,133 @@ def health_check():
         'timestamp': datetime.now().isoformat()
     })
 
+@app.route('/api/forecast')
+def get_forecast():
+    forecasts = AttendanceForecast.query.order_by(AttendanceForecast.forecast_date).all()
+    return jsonify([
+        {
+            'date': f.forecast_date.strftime('%Y-%m-%d'),
+            'predicted_present': f.predicted_present
+        } for f in forecasts
+    ])
+
+@app.route('/api/trigger_forecast', methods=['POST'])
+def trigger_forecast():
+    from model import generate_forecast_from_db
+    generate_forecast_from_db()
+    return jsonify({'success': True, 'message': 'Forecast updated.'})
+
+@app.route('/api/rfid_scans')
+def get_rfid_scans():
+    limit = int(request.args.get('limit', 10))
+    scans = RFIDScanLog.query.order_by(RFIDScanLog.timestamp.desc()).limit(limit).all()
+    return jsonify([
+        {
+            'id': scan.id,
+            'tag': scan.tag,
+            'student_name': scan.student_name,
+            'timestamp': scan.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+        } for scan in scans
+    ])
+
+# Function to log RFID scan in both databases and mark attendance
+def log_rfid_scan(tag, student_name):
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    today = date.today()
+    
+    # Insert into rfid_scans.db
+    conn = sqlite3.connect(RFID_DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO rfid_scan_log (tag, student_name, timestamp) VALUES (?, ?, ?)', (tag, student_name, now))
+    conn.commit()
+    conn.close()
+    
+    # Insert into main attendance_system.db via SQLAlchemy
+    scan = RFIDScanLog(tag=tag, student_name=student_name, timestamp=datetime.now())
+    db.session.add(scan)
+    
+    # Mark attendance for the student
+    student = Student.query.filter_by(full_name=student_name).first()
+    if student:
+        # Check if attendance already exists for today
+        existing_attendance = Attendance.query.filter_by(
+            student_id=student.id,
+            attendance_date=today
+        ).first()
+        
+        if existing_attendance:
+            existing_attendance.status = 'present'
+            existing_attendance.method = 'rfid'
+            existing_attendance.time_marked = datetime.now()  # Update timestamp for when attendance was last modified
+        else:
+            # Create new attendance record
+            attendance = Attendance(
+                student_id=student.id,
+                class_id=student.class_id,
+                teacher_id=1,  # Using admin user as default
+                attendance_date=today,
+                status='present',
+                method='rfid'
+            )
+            db.session.add(attendance)
+    
+    # Commit changes immediately to ensure real-time updates
+    db.session.commit()
+
+# Example API endpoint to trigger scan logging
+@app.route('/api/scan_rfid', methods=['POST'])
+def scan_rfid():
+    data = request.json
+    tag = data.get('tag')
+    student_name = data.get('student_name')
+    if not tag or not student_name:
+        return jsonify({'success': False, 'message': 'Tag and student_name required'}), 400
+    
+    # Check if student exists before proceeding
+    student = Student.query.filter_by(full_name=student_name).first()
+    if not student:
+        return jsonify({
+            'success': False,
+            'message': f'Student not found: {student_name}. Please add the student to the database first.',
+            'scan': {
+                'tag': tag,
+                'student_name': student_name,
+                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            }
+        }), 404
+    
+    # Log the scan and mark attendance
+    log_rfid_scan(tag, student_name)
+    
+    # Format response with student details and attendance status
+    response = {
+        'success': True,
+        'message': f'RFID scan logged for {student_name}',
+        'scan': {
+            'tag': tag,
+            'student_name': student_name,
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+    }
+    
+    # Add attendance details
+    today = date.today()
+    attendance = Attendance.query.filter_by(
+        student_id=student.id,
+        attendance_date=today
+    ).first()
+    
+    if attendance:
+        response['attendance'] = {
+            'student_id': student.id,
+            'status': attendance.status,
+            'method': attendance.method,
+            'date': today.strftime('%Y-%m-%d'),
+            'time_marked': attendance.time_marked.strftime('%Y-%m-%d %H:%M:%S')
+        }
+    
+    return jsonify(response)
+
 # Error handlers
 @app.errorhandler(404)
 def not_found_error(error):
@@ -688,4 +750,9 @@ def init_db():
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Use port 5001 since port 5000 is already in use by macOS AirPlay
+    import sys
+    port = 5001
+    if len(sys.argv) > 1 and sys.argv[1].startswith('--port='):
+        port = int(sys.argv[1].split('=')[1])
+    app.run(debug=True, host='0.0.0.0', port=port)

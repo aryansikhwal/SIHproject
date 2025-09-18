@@ -258,6 +258,14 @@ export const authAPI = {
   },
 };
 
+// RFID Scan APIs
+export const rfidScanAPI = {
+  // Get recent RFID scans
+  getRecentScans: (limit = 10) => {
+    return api.get(`/api/rfid_scans?limit=${limit}`);
+  },
+};
+
 // Utility functions for error handling
 export const handleAPIError = (error) => {
   if (error.response) {

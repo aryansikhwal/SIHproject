@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AttenSync{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Dashboard</h1>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Total Students</h5>
+                    <p class="card-text display-4">{{ total_students }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Present Today</h5>
+                    <p class="card-text display-4">{{ present_today }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h5 class="card-title">Attendance Rate</h5>
+                    <p class="card-text display-4">{{ attendance_rate|round(1) }}%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Recent Attendance Sessions</h5>
+        </div>
+        <div class="card-body">
+            {% if recent_activity %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Class</th>
+                            <th>Detected</th>
+                            <th>Recognized</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for activity in recent_activity %}
+                        <tr>
+                            <td>{{ activity.session_date.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ activity.session_time.strftime('%H:%M:%S') }}</td>
+                            <td>Class {{ activity.class_id }}</td>
+                            <td>{{ activity.total_students_detected }}</td>
+                            <td>{{ activity.total_students_recognized }}</td>
+                            <td>
+                                {% if activity.processing_status == 'completed' %}
+                                <span class="badge bg-success">Completed</span>
+                                {% elif activity.processing_status == 'pending' %}
+                                <span class="badge bg-warning">Pending</span>
+                                {% else %}
+                                <span class="badge bg-danger">Failed</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="text-center text-muted">No recent activity</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Quick Links</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="{{ url_for('attendance_page') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-clipboard-list"></i> Take Attendance
+                        </a>
+                        <a href="{{ url_for('students_page') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-user-graduate"></i> Manage Students
+                        </a>
+                        <a href="{{ url_for('reports') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-chart-bar"></i> View Reports
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>RFID Status</h5>
+                </div>
+                <div class="card-body">
+                    <p class="lead">RFID attendance scanning is active</p>
+                    <p>Scan the RFID tag to automatically mark student attendance.</p>
+                    <a href="{{ url_for('get_rfid_scans') }}" class="btn btn-primary">View RFID Logs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

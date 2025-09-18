@@ -9,7 +9,9 @@ import Students from './pages/Students';
 import Reports from './pages/Reports';
 import Trends from './pages/Trends';
 import Settings from './pages/Settings';
+import Forecast from './pages/Forecast';
 import indexedDBService from './services/indexedDB';
+import RFIDScanLogList from './components/RFIDScanLogList';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -45,7 +47,9 @@ function App() {
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/trends" element={<Trends />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/forecast" element={<Forecast />} />
               </Routes>
+              <RFIDScanLogList />
             </main>
           </div>
         </div>

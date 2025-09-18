@@ -2,10 +2,19 @@ import React from 'react';
 import { Users, Calendar, UserX, TrendingUp } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { useLanguage } from '../contexts/LanguageContext';
+import Insights from '../components/Insights';
+import RFIDScanLogList from '../components/RFIDScanLogList';
 
 const Dashboard = () => {
   const { t } = useLanguage();
-  
+  const [statistics, setStatistics] = React.useState({});
+
+  React.useEffect(() => {
+    fetch('/api/dashboard')
+      .then(res => res.json())
+      .then(data => setStatistics(data.statistics));
+  }, []);
+
   // Mock data for charts
   const weeklyData = [
     { day: 'Mon', attendance: 92 },
@@ -149,6 +158,12 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Insights Component */}
+      <Insights statistics={statistics} />
+
+      {/* RFID Scan Log List */}
+      <RFIDScanLogList />
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import pandas as pd
 from prophet import Prophet
 import matplotlib.pyplot as plt
+from sqlalchemy import func, text
+from datetime import datetime
 
 def generate_forecast(filename):
     """
@@ -65,6 +67,42 @@ def generate_forecast(filename):
     except Exception as e:
         print(f"An error occurred in the forecasting process: {e}")
         return None, None, None
+
+def generate_forecast_from_db():
+    from app import db, Attendance
+    # Query attendance data from DB
+    data = db.session.query(
+        Attendance.attendance_date,
+        func.count().label('y')
+    ).filter(Attendance.status == 'present').group_by(Attendance.attendance_date).all()
+    df = pd.DataFrame(data, columns=['ds', 'y'])
+    if len(df) == 0:
+        print('No attendance data for forecast.')
+        return None, None, None
+    df['ds'] = pd.to_datetime(df['ds'])
+    model = Prophet()
+    model.fit(df)
+    future = model.make_future_dataframe(periods=7)
+    forecast = model.predict(future)
+    # Save forecast to DB
+    for _, row in forecast.iterrows():
+        date = row['ds'].date() if isinstance(row['ds'], datetime) else row['ds']
+        yhat = int(row['yhat'])
+        db.session.execute(
+            text("""
+            INSERT OR REPLACE INTO attendance_forecast (forecast_date, predicted_present)
+            VALUES (:date, :yhat)
+            """),
+            {'date': date, 'yhat': yhat}
+        )
+    db.session.commit()
+    print('Forecast stored in DB.')
+    fig1 = model.plot(forecast, figsize=(10, 6))
+    plt.title("7-Day Attendance Forecast", fontsize=18, fontweight='bold')
+    plt.xlabel("Date", fontsize=14)
+    plt.ylabel("Attendance Count", fontsize=14)
+    plt.tight_layout()
+    return forecast, fig1, None
 
 if __name__ == '__main__':
     # This block allows you to run the function directly for testing
