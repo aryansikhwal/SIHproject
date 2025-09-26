@@ -1,154 +1,93 @@
-﻿# ==============================================# Python
+﻿# ==============================================
+# AttenSync - Optimized .gitignore
+# ==============================================
 
-# AttenSync - Optimized .gitignore__pycache__/
-
-# ==============================================*.py[cod]
-
+# Python
+__pycache__/
+*.py[cod]
 *.class
-
-# Python Runtime & Virtual Environment.Python
-
-__pycache__/env/
-
-*.py[cod]build/
-
-*.pyodevelop-eggs/
-
-*.pyddist/
-
-.Pythondownloads/
-
-.venv/eggs/
-
-venv/.eggs/
-
-env/lib/
-
-ENV/lib64/
-
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
 parts/
-
-# Python Build & Distributionsdist/
-
-build/var/
-
-dist/wheels/
-
-*.egg-info/*.egg-info/
-
-.installed.cfg.installed.cfg
-
-*.egg*.egg
-
-*.wheel*.manifest
-
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.wheel
+*.manifest
 *.spec
+pip-log.txt
+pip-delete-this-directory.txt
 
-# Environment Variables (Keep sensitive data secure)pip-log.txt
-
-.envpip-delete-this-directory.txt
-
-.env.local.env
-
-.env.development.local.venv
-
-.env.test.localvenv/
-
-.env.production.localENV/
-
-
-
-# Node.js Dependencies & Build# Node
-
-node_modules/node_modules/
-
-/.pnp/.pnp
-
-.pnp.js.pnp.js
-
-npm-debug.log*.npm
-
-yarn-debug.log**.tgz
-
-yarn-error.log*.env.local
-
+# Python Runtime & Virtual Environment
+.env
+.env.local
 .env.development.local
+.env.test.local
+.env.production.local
+.venv/
+venv/
+env/
+ENV/
 
-# React Build Output (Keep source, ignore build).env.test.local
+# Node.js Dependencies & Build
+node_modules/
+/.pnp
+.pnp.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tgz
 
-/client/build/.env.production.local
+# React Build Output (Keep source, ignore build)
+/client/build/
+/build/
+/static/css/*.map
+/static/js/*.map
 
-/build/npm-debug.log*
-
-/static/css/*.mapyarn-debug.log*
-
-/static/js/*.mapyarn-error.log*
-
-
-
-# Database Files (Keep structure, ignore data)# IDE
-
-*.db.idea/
-
-*.sqlite.vscode/
-
-*.sqlite3*.swp
-
-/instance/*.db*.swo
-
-.DS_Store
+# Database Files (Keep structure, ignore data)
+*.db
+*.sqlite
+*.sqlite3
+/instance/*.db
 
 # IDE & Editor Files
-
-.vscode/settings.json# SQLite
-
-.idea/*.db
-
+.idea/
+.vscode/
 *.swp
+*.swo
+.DS_Store
+.vscode/settings.json
 
-*.swo# Testing
-
-*~coverage/
-
+# Testing & Coverage
+coverage/
 htmlcov/
-
-# Operating System.tox/
-
-.DS_Store.coverage
-
-.DS_Store?.coverage.*
-
-._*.cache
-
-.Spotlight-V100nosetests.xml
-
-.Trashescoverage.xml
-
-ehthumbs.db*.cover
-
-Thumbs.db.hypothesis/
-
-
-
-# Testing & Coverage# Production build
-
-coverage//build
-
-htmlcov//static
-
+.tox/
 .coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
 
-.coverage.*# Misc
-
-.cache/.DS_Store
-
-.pytest_cache/.env.local
-
-.tox/.env.development.local
-
-*.cover.env.test.local
-
-.hypothesis/.env.production.local
+# Operating System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 
 # Logs & Temporary Files
@@ -166,17 +105,6 @@ htmlcov//static
 
 # Jupyter Notebooks Checkpoints
 .ipynb_checkpoints/
-
-# ==============================================
-# KEEP THESE IMPORTANT FILES:
-# ==============================================
-# ✅ All source code (.py, .js, .jsx, .css, .html)
-# ✅ Configuration files (package.json, requirements.txt)
-# ✅ Database schema files (database.sql, models.py)
-# ✅ Documentation (README.md, docs/)
-# ✅ Static assets (images, fonts, icons)
-# ✅ Project structure and components
-# ✅ Sample data files (if needed for setup)
 
 # ==============================================
 # PROJECT-SPECIFIC IGNORES
