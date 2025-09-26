@@ -7,6 +7,47 @@
 
 A comprehensive **IoT-based attendance management system** that combines **ESP32 RFID hardware** with a modern **React web dashboard** for real-time attendance tracking.
 
+## 📁 Repository Structure
+
+```
+AttenSync/
+├── 📂 src/                     # Source code
+│   ├── 📂 backend/            # Flask backend & API
+│   │   ├── app.py            # Main Flask application
+│   │   ├── backend.py        # API endpoints
+│   │   ├── models.py         # Database models
+│   │   ├── database.sql      # Database schema
+│   │   └── ...               # Other backend utilities
+│   ├── 📂 frontend/          # React web application
+│   │   ├── public/           # Static assets
+│   │   ├── src/              # React components
+│   │   │   ├── components/   # Reusable components
+│   │   │   ├── pages/        # Page components
+│   │   │   └── services/     # API services
+│   │   └── package.json      # Frontend dependencies
+│   └── 📂 hardware/          # ESP32 & RFID scripts
+│       ├── esp32_rfid_listener.py
+│       ├── ble_connection_test.py
+│       └── ...               # Hardware utilities
+├── 📂 tests/                  # Test files
+├── 📂 docs/                   # Documentation
+│   ├── SETUP.md              # Setup instructions
+│   ├── DEPLOYMENT.md         # Deployment guide
+│   └── ...                   # Additional docs
+├── 📂 assets/                 # Assets & data
+│   ├── data/                 # Sample data files
+│   └── SIH2025-AttenSync-SIH25012.pdf
+├── 📂 scripts/                # Automation scripts
+│   ├── setup/                # Setup scripts
+│   │   ├── quick_setup.bat   # Windows setup
+│   │   └── quick_setup.sh    # Linux setup
+│   └── start_*.sh            # Start scripts
+├── 📂 templates/              # Flask templates
+├── 📂 static/                 # Static web assets
+├── 📂 instance/               # Database files (ignored)
+└── requirements.txt           # Python dependencies
+```
+
 ## 🌟 Key Features
 
 - 🔷 **Real-time RFID Scanning** - ESP32 Bluetooth integration
@@ -28,23 +69,23 @@ cd SIHproject
 
 # Run automated setup script
 # Windows:
-quick_setup.bat
+scripts/setup/quick_setup.bat
 # Linux/macOS:
-chmod +x quick_setup.sh && ./quick_setup.sh
+chmod +x scripts/setup/quick_setup.sh && ./scripts/setup/quick_setup.sh
 ```
 
 ### Option 2: Manual Setup
 
-📖 **For detailed setup instructions, see [SETUP.md](SETUP.md)**
+📖 **For detailed setup instructions, see [docs/SETUP.md](docs/SETUP.md)**
 
 ## 🎯 Quick Run
 
 ```bash
 # Start backend server
-python backend.py
+cd src/backend && python backend.py
 
 # Start frontend (in another terminal)
-cd client && npm start
+cd src/frontend && npm start
 
 # Access the application
 # Web Dashboard: http://localhost:3000

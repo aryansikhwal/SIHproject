@@ -42,8 +42,8 @@ python initialize_system.py
 ### 3️⃣ React Frontend Setup
 
 ```bash
-# Navigate to client directory
-cd client
+# Navigate to frontend directory
+cd src/frontend
 
 # Install Node.js dependencies
 npm install
@@ -63,14 +63,14 @@ venv\Scripts\activate  # Windows
 # source venv/bin/activate  # macOS/Linux
 
 # Start Flask backend server
-python backend.py
+cd src/backend && python backend.py
 ```
 *Backend will run on: http://localhost:5000*
 
 **Terminal 2 - Start Frontend Server:**
 ```bash
-# In a new terminal, navigate to client folder
-cd client
+# In a new terminal, navigate to frontend folder
+cd src/frontend
 
 # Start React development server
 npm start
@@ -211,7 +211,7 @@ pip install -r requirements.txt --force-reinstall
 **3. Node.js Dependencies Issues:**
 ```bash
 # Clear npm cache and reinstall
-cd client
+cd src/frontend
 rm -rf node_modules package-lock.json
 npm cache clean --force
 npm install
