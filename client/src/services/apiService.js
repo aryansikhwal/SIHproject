@@ -1,7 +1,7 @@
-"""
-Fresh API Service Layer for AttenSync Frontend
-Clean implementation for backend communication
-"""
+/**
+ * Fresh API Service Layer for AttenSync Frontend
+ * Clean implementation for backend communication
+ */
 import axios from 'axios';
 
 // Configuration
