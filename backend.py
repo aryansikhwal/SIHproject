@@ -32,7 +32,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 CORS(app, resources={
     r"/api/*": {
         "origins": ["http://localhost:3000", "http://localhost:5000"],
-        "supports_credentials": True,
+        "supports_credentials": False,  # Temporarily disable credentials
         "allow_headers": ["Content-Type", "Authorization"],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     }

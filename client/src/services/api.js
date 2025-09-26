@@ -2,13 +2,14 @@ import axios from 'axios';
 
 // Base API configuration
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+console.log('API_BASE_URL:', API_BASE_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,  // Important for handling cookies with CORS
+  // withCredentials: true,  // Temporarily disabled to debug CORS issues
 });
 
 // Request interceptor to add auth tokens if needed
@@ -262,7 +263,9 @@ export const authAPI = {
 export const rfidScanAPI = {
   // Get recent RFID scans
   getRecentScans: (limit = 10) => {
-    return api.get(`/api/rfid_scans?limit=${limit}`);
+    const url = `/api/rfid/scans?limit=${limit}`;
+    console.log('Making request to:', API_BASE_URL + url);
+    return api.get(url);
   },
 };
 

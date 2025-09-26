@@ -200,6 +200,9 @@ class RFIDScanLog(db.Model):
     error_message = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
+    # Relationships
+    student_info = db.relationship('Student', backref='rfid_scans', lazy=True)
+    
     def to_dict(self):
         """Convert to dictionary for API responses"""
         return {

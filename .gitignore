@@ -1,76 +1,203 @@
-﻿# Python
-__pycache__/
-*.py[cod]
+﻿# ==============================================# Python
+
+# AttenSync - Optimized .gitignore__pycache__/
+
+# ==============================================*.py[cod]
+
 *.class
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
+
+# Python Runtime & Virtual Environment.Python
+
+__pycache__/env/
+
+*.py[cod]build/
+
+*.pyodevelop-eggs/
+
+*.pyddist/
+
+.Pythondownloads/
+
+.venv/eggs/
+
+venv/.eggs/
+
+env/lib/
+
+ENV/lib64/
+
 parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-*.manifest
+
+# Python Build & Distributionsdist/
+
+build/var/
+
+dist/wheels/
+
+*.egg-info/*.egg-info/
+
+.installed.cfg.installed.cfg
+
+*.egg*.egg
+
+*.wheel*.manifest
+
 *.spec
-pip-log.txt
-pip-delete-this-directory.txt
-.env
-.venv
-venv/
-ENV/
 
-# Node
-node_modules/
-/.pnp
-.pnp.js
-.npm
-*.tgz
-.env.local
+# Environment Variables (Keep sensitive data secure)pip-log.txt
+
+.envpip-delete-this-directory.txt
+
+.env.local.env
+
+.env.development.local.venv
+
+.env.test.localvenv/
+
+.env.production.localENV/
+
+
+
+# Node.js Dependencies & Build# Node
+
+node_modules/node_modules/
+
+/.pnp/.pnp
+
+.pnp.js.pnp.js
+
+npm-debug.log*.npm
+
+yarn-debug.log**.tgz
+
+yarn-error.log*.env.local
+
 .env.development.local
-.env.test.local
-.env.production.local
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# IDE
-.idea/
-.vscode/
+# React Build Output (Keep source, ignore build).env.test.local
+
+/client/build/.env.production.local
+
+/build/npm-debug.log*
+
+/static/css/*.mapyarn-debug.log*
+
+/static/js/*.mapyarn-error.log*
+
+
+
+# Database Files (Keep structure, ignore data)# IDE
+
+*.db.idea/
+
+*.sqlite.vscode/
+
+*.sqlite3*.swp
+
+/instance/*.db*.swo
+
+.DS_Store
+
+# IDE & Editor Files
+
+.vscode/settings.json# SQLite
+
+.idea/*.db
+
 *.swp
-*.swo
-.DS_Store
 
-# SQLite
-*.db
+*.swo# Testing
 
-# Testing
-coverage/
+*~coverage/
+
 htmlcov/
-.tox/
+
+# Operating System.tox/
+
+.DS_Store.coverage
+
+.DS_Store?.coverage.*
+
+._*.cache
+
+.Spotlight-V100nosetests.xml
+
+.Trashescoverage.xml
+
+ehthumbs.db*.cover
+
+Thumbs.db.hypothesis/
+
+
+
+# Testing & Coverage# Production build
+
+coverage//build
+
+htmlcov//static
+
 .coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
 
-# Production build
-/build
-/static
+.coverage.*# Misc
 
-# Misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.cache/.DS_Store
+
+.pytest_cache/.env.local
+
+.tox/.env.development.local
+
+*.cover.env.test.local
+
+.hypothesis/.env.production.local
+
+
+# Logs & Temporary Files
+*.log
+*.tmp
+*.temp
+/logs/
+/tmp/
+
+# SSL Certificates & Keys
+*.pem
+*.key
+*.crt
+*.cert
+
+# Jupyter Notebooks Checkpoints
+.ipynb_checkpoints/
+
+# ==============================================
+# KEEP THESE IMPORTANT FILES:
+# ==============================================
+# ✅ All source code (.py, .js, .jsx, .css, .html)
+# ✅ Configuration files (package.json, requirements.txt)
+# ✅ Database schema files (database.sql, models.py)
+# ✅ Documentation (README.md, docs/)
+# ✅ Static assets (images, fonts, icons)
+# ✅ Project structure and components
+# ✅ Sample data files (if needed for setup)
+
+# ==============================================
+# PROJECT-SPECIFIC IGNORES
+# ==============================================
+
+# RFID Log Files (Optional - comment out if you want to keep logs)
+rfid_listener.log*
+
+# Backup Files
+*.backup
+*.bak
+
+# Development Testing Files
+/test_*.py
+/debug_*.py
+
+# Compiled Assets (but keep source)
+*.compiled
+
+# Large Media Files (if any)
+*.mp4
+*.mov
+*.avi
+*.mkv
