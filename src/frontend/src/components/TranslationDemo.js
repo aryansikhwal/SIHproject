@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../contexts/L                className=\"px-3 py-1 text-sm bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full transition-colors\"               className=\"px-3 py-1 text-sm bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full transition-colors\"nguageContext';
 import { useTranslateText } from '../hooks/useTranslation';
 import { MessageCircle, Send } from 'lucide-react';
 
@@ -82,7 +82,7 @@ const TranslationDemo = () => {
               <button
                 key={index}
                 onClick={() => setTextToTranslate(sample)}
-                className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+                className="px-3 py-1 text-sm bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full transition-colors"
               >
                 {sample.substring(0, 30)}...
               </button>

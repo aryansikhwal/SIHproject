@@ -387,8 +387,8 @@ const Trends = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`p-4 rounded-xl border-2 transition-all flex items-center justify-center text-sm font-medium ${
                   activeTab === tab.id
-                    ? 'border-primary bg-primary text-white'
-                    : 'border-gray-200 text-neutral-dark hover:border-primary hover:bg-primary-light hover:text-white'
+                    ? 'border-blue-600 bg-blue-600 text-white'
+                    : 'border-gray-200 text-neutral-dark hover:border-blue-500 hover:bg-blue-500 hover:text-white'
                 }`}
               >
                 <Icon className="h-4 w-4 mr-2" />

@@ -15,7 +15,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
         <div className="flex items-center">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="p-2 rounded-lg hover:bg-blue-500 hover:text-white transition-colors"
           >
             <Menu className="h-6 w-6 text-neutral-dark" />
           </button>
@@ -27,7 +27,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
           <LanguageSwitcher />
           <button 
             onClick={() => navigate('/settings')}
-            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="p-2 rounded-lg hover:bg-blue-500 hover:text-white transition-colors"
           >
             <Settings className="h-5 w-5 text-neutral-dark" />
           </button>

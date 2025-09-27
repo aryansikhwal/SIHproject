@@ -533,12 +533,12 @@
             const navButtons = document.querySelectorAll('.nav-item');
             navButtons.forEach(btn => {
                 btn.classList.remove('bg-primary', 'text-white', 'shadow-lg');
-                btn.classList.add('text-neutral-dark', 'hover:bg-primary-light', 'hover:text-white');
+                btn.classList.add('text-neutral-dark', 'hover:bg-primary-light', 'hover:text-blue');
             });
             
             // Highlight active button
             event.target.closest('.nav-item').classList.add('bg-primary', 'text-white', 'shadow-lg');
-            event.target.closest('.nav-item').classList.remove('text-neutral-dark', 'hover:bg-primary-light', 'hover:text-white');
+            event.target.closest('.nav-item').classList.remove('text-neutral-dark', 'hover:bg-primary-light', 'hover:text-blue');
         }
 
         // Initialize charts when page loads

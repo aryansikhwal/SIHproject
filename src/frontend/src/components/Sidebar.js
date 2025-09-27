@@ -39,8 +39,8 @@ const Sidebar = ({ isOpen }) => {
                 onClick={() => navigate(`/${item.id}`)}
                 className={`w-full flex items-center px-3 py-3 rounded-2xl transition-all duration-200 ${
                   currentPath === item.id
-                    ? 'bg-primary text-white shadow-lg'
-                    : 'text-neutral-dark hover:bg-primary-light hover:text-white'
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : 'text-neutral-dark hover:bg-blue-500 hover:text-white'
                 }`}
               >
                 <Icon className="h-5 w-5 flex-shrink-0" />

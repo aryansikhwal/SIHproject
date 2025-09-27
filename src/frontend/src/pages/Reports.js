@@ -169,14 +169,14 @@ const Reports = () => {
           <div className="mt-4 lg:mt-0 flex flex-col sm:flex-row gap-3">
             <button
               onClick={() => exportReport('csv')}
-              className="px-6 py-2 bg-primary-light text-white rounded-2xl hover:bg-primary transition-colors flex items-center gap-2"
+              className="px-6 py-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-600 transition-colors flex items-center gap-2"
             >
               <Download className="h-4 w-4" />
               Export CSV
             </button>
             <button
               onClick={() => exportReport('pdf')}
-              className="px-6 py-2 bg-primary text-white rounded-2xl hover:bg-green-700 transition-colors flex items-center gap-2"
+              className="px-6 py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors flex items-center gap-2"
             >
               <FileText className="h-4 w-4" />
               Export PDF
@@ -200,8 +200,8 @@ const Reports = () => {
                     onClick={() => setSelectedReport(type.id)}
                     className={`p-3 rounded-xl border-2 transition-all flex items-center justify-center text-sm font-medium ${
                       selectedReport === type.id
-                        ? 'border-primary bg-primary text-white'
-                        : 'border-gray-200 text-neutral-dark hover:border-primary'
+                        ? 'border-blue-600 bg-blue-600 text-white'
+                        : 'border-gray-200 text-neutral-dark hover:border-blue-500 hover:bg-blue-500 hover:text-white'
                     }`}
                   >
                     <Icon className="h-4 w-4 mr-2" />

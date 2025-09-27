@@ -12,7 +12,7 @@ const LanguageSwitcher = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg border border-gray-300 hover:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+        className="flex items-center space-x-2 px-3 py-2 rounded-lg border border-gray-300 hover:border-blue-500 hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
       >
         <Languages className="h-4 w-4 text-gray-500" />
         <span className="text-sm font-medium text-gray-700">
@@ -46,9 +46,9 @@ const LanguageSwitcher = () => {
                     changeLanguage(language.code);
                     setIsOpen(false);
                   }}
-                  className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center justify-between ${
+                  className={`w-full text-left px-3 py-2 text-sm hover:bg-blue-500 hover:text-white flex items-center justify-between ${
                     currentLanguage === language.code 
-                      ? 'bg-primary-50 text-primary-700 border-r-2 border-primary-500' 
+                      ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-500' 
                       : 'text-gray-700'
                   }`}
                 >

@@ -84,7 +84,7 @@ const Settings = () => {
           <div className="mt-4 lg:mt-0 flex gap-3">
             <button
               onClick={() => setIsEditing(!isEditing)}
-              className="px-6 py-2 bg-primary-light text-white rounded-2xl hover:bg-primary transition-colors flex items-center gap-2"
+              className="px-6 py-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-600 transition-colors flex items-center gap-2"
             >
               <Edit className="h-4 w-4" />
               {isEditing ? 'Cancel' : 'Edit'}
@@ -92,7 +92,7 @@ const Settings = () => {
             {isEditing && (
               <button
                 onClick={saveSettings}
-                className="px-6 py-2 bg-primary text-white rounded-2xl hover:bg-green-700 transition-colors flex items-center gap-2"
+                className="px-6 py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors flex items-center gap-2"
               >
                 <Save className="h-4 w-4" />
                 Save Changes
@@ -202,7 +202,7 @@ const Settings = () => {
             <div className="space-y-3">
               <div className="flex justify-between items-center p-3 bg-gray-50 rounded-xl">
                 <span className="text-neutral-dark">Change Password</span>
-                <button className="px-4 py-2 bg-primary text-white rounded-2xl hover:bg-green-700 transition-colors text-sm">
+                <button className="px-4 py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors text-sm">
                   Update
                 </button>
               </div>
@@ -246,7 +246,7 @@ const Settings = () => {
               
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center justify-center p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors"
+                className="w-full flex items-center justify-center p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-500 hover:text-white transition-colors"
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Logout from all devices
@@ -337,7 +337,7 @@ const Settings = () => {
                 <span className="text-sm text-gray-600">Last Sync:</span>
                 <span className="text-sm font-medium text-neutral-dark">{syncSettings.lastSync}</span>
               </div>
-              <button className="w-full px-4 py-2 bg-primary text-white rounded-2xl hover:bg-green-700 transition-colors text-sm">
+              <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors text-sm">
                 Sync Now
               </button>
             </div>

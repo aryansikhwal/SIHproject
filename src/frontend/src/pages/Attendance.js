@@ -118,13 +118,13 @@ const Attendance = () => {
           <div className="mt-4 lg:mt-0 flex flex-col sm:flex-row gap-3">
             <button
               onClick={markAllPresent}
-              className="px-6 py-2 bg-primary-light text-white rounded-2xl hover:bg-primary transition-colors"
+              className="px-6 py-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-600 transition-colors"
             >
               {t('markAllPresent')}
             </button>
             <button
               onClick={exportAttendance}
-              className="px-6 py-2 bg-primary text-white rounded-2xl hover:bg-green-700 transition-colors flex items-center gap-2"
+              className="px-6 py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors flex items-center gap-2"
             >
               <Download className="h-4 w-4" />
               {t('exportCsv')}
@@ -269,7 +269,7 @@ const Attendance = () => {
                   </tr>
                 ) : (
                   filteredStudents.map((student) => (
-                    <tr key={student.id} className="hover:bg-gray-50">
+                    <tr key={student.id} className="hover:bg-blue-50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-neutral-dark">
                         {student.id}
                       </td>

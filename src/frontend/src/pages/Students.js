@@ -128,13 +128,13 @@ const Students = () => {
             <button
               type="button"
               onClick={() => setShowAddModal(false)}
-              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors"
+              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-2xl hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-colors"
             >
               {t('cancel')}
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-primary text-white rounded-2xl hover:bg-green-700 transition-colors"
+              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors"
             >
               {t('addStudent')}
             </button>
@@ -155,7 +155,7 @@ const Students = () => {
           </div>
           <button
             onClick={() => setShowAddModal(true)}
-            className="mt-4 lg:mt-0 px-6 py-2 bg-primary text-white rounded-2xl hover:bg-green-700 transition-colors flex items-center gap-2"
+            className="mt-4 lg:mt-0 px-6 py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors flex items-center gap-2"
           >
             <Plus className="h-4 w-4" />
             {t('addStudent')}
@@ -225,7 +225,7 @@ const Students = () => {
                 </div>
               </div>
               <div className="flex gap-1">
-                <button className="p-2 text-gray-400 hover:text-primary transition-colors">
+                <button className="p-2 text-gray-400 hover:text-blue-600 transition-colors">
                   <Edit className="h-4 w-4" />
                 </button>
                 <button 
