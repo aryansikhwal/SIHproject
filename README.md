@@ -7,6 +7,15 @@
 
 A comprehensive **IoT-based attendance management system** that combines **ESP32 RFID hardware** with a modern **React web dashboard** for real-time attendance tracking.
 
+## 🌟 Key Features
+
+- 🔷 **Real-time RFID Scanning** - ESP32 Bluetooth integration
+- 🔄 **Offline-first** - Locally stored data until network availability
+- 🎨 **Modern Web Dashboard** - React-based responsive UI
+- 📊 **Live Analytics** - Real-time attendance statistics
+- 👥 **Attendance Prediction** - ML model predcits attendance forecast
+- 📱 **Multi-Language Accesibility** - Available in Punjabi, Hindi & English
+
 ## 📁 Repository Structure
 
 ```
@@ -48,88 +57,6 @@ AttenSync/
 └── requirements.txt           # Python dependencies
 ```
 
-## 🚀 Quick Start (Single Command!)
-
-AttenSync can be started with a single command that launches all components:
-
-### Windows Users:
-```batch
-# Double-click to run
-scripts\start_attensync.bat
-
-# Or run in PowerShell
-powershell -ExecutionPolicy Bypass -File scripts\start_attensync.ps1
-```
-
-### Linux/macOS Users:
-```bash
-# Make executable (first time only)
-chmod +x scripts/start_attensync.sh
-
-# Run the unified launcher
-./scripts/start_attensync.sh
-```
-
-### 🎛️ Options:
-```bash
-# Skip RFID hardware (web-only development)
-./scripts/start_attensync.sh --no-rfid
-
-# Skip dependency installation (faster startup)
-./scripts/start_attensync.sh --skip-deps
-```
-
-This will automatically:
-- ✅ Install all dependencies (Python & Node.js packages)
-- 🚀 Start Flask backend server (http://localhost:5000)
-- ⚛️ Start React frontend server (http://localhost:3000)  
-- 📡 Start RFID hardware listener
-- 📊 Display service status and management options
-
-## 🌟 Key Features
-
-- 🔷 **Real-time RFID Scanning** - ESP32 Bluetooth integration
-- 🎨 **Modern Web Dashboard** - React-based responsive UI
-- 📊 **Live Analytics** - Real-time attendance statistics
-- 👥 **Student Management** - Complete CRUD operations
-- 📱 **Mobile Responsive** - Works on all devices
-- 🔄 **Live Data Sync** - Instant updates across all interfaces
-- 🌏 **Indian Localization** - Pre-loaded with authentic Indian student data
-
-## 🚀 Quick Start
-
-### Option 1: Automated Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/aryansikhwal/SIHproject.git
-cd SIHproject
-
-# Run automated setup script
-# Windows:
-scripts/setup/quick_setup.bat
-# Linux/macOS:
-chmod +x scripts/setup/quick_setup.sh && ./scripts/setup/quick_setup.sh
-```
-
-### Option 2: Manual Setup
-
-📖 **For detailed setup instructions, see [docs/SETUP.md](docs/SETUP.md)**
-
-## 🎯 Quick Run
-
-```bash
-# Start backend server
-cd src/backend && python backend.py
-
-# Start frontend (in another terminal)
-cd src/frontend && npm start
-
-# Access the application
-# Web Dashboard: http://localhost:3000
-# API Endpoints: http://localhost:5000/api/
-```
-
 ## 🔧 Tech Stack
 
 | Component | Technology |
@@ -147,7 +74,6 @@ cd src/frontend && npm start
 - **RFID Cards/Tags**
 - **Bluetooth-enabled Computer**
 
-*Note: Software runs independently without hardware for demo purposes*
 
 ## 📊 System Architecture
 
@@ -165,18 +91,6 @@ cd src/frontend && npm start
                            └──────────────┘
 ```
 
-## 🎨 Screenshots
-
-*Dashboard with real-time RFID scan data and attendance analytics*
-
-## 📈 Sample Data
-
-The system comes pre-loaded with **Indian student data**:
-
-- Arjun Sharma, Priya Patel, Rajesh Kumar, Sneha Gupta, and more
-- Realistic roll numbers (2024001-2024010)
-- Complete attendance history
-- RFID card assignments
 
 ## 🤖 API Endpoints
 
@@ -226,9 +140,6 @@ AttenSync/
 4. **Push** to the branch: `git push origin feature-name`  
 5. **Open** a Pull Request
 
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ## 🏆 Achievements
 
@@ -238,16 +149,4 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - ✅ **Scalable Architecture** - RESTful API design
 - ✅ **Production Ready** - Complete with documentation
 
-## 📞 Support
-
-Having issues? Check our **[Setup Guide](SETUP.md)** or create an issue with:
-- Your operating system
-- Python/Node.js versions  
-- Error messages/screenshots
-- Steps to reproduce
-
 ---
-
-**⭐ Star this repository if you find it helpful!**
-
-*Built with ❤️ for the future of automated attendance management*
