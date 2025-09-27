@@ -1,6 +1,6 @@
 import sqlite3
 
-db = sqlite3.connect('instance/attendance_system.db')
+db = sqlite3.connect('../instance/attendance_system.db')
 c = db.cursor()
 
 # Check RFID tables

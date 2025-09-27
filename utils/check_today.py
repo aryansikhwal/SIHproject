@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import date
 
-db = sqlite3.connect('instance/attendance_system.db')
+db = sqlite3.connect('../instance/attendance_system.db')
 c = db.cursor()
 
 today = date.today().strftime('%Y-%m-%d')
