@@ -48,6 +48,44 @@ AttenSync/
 └── requirements.txt           # Python dependencies
 ```
 
+## 🚀 Quick Start (Single Command!)
+
+AttenSync can be started with a single command that launches all components:
+
+### Windows Users:
+```batch
+# Double-click to run
+scripts\start_attensync.bat
+
+# Or run in PowerShell
+powershell -ExecutionPolicy Bypass -File scripts\start_attensync.ps1
+```
+
+### Linux/macOS Users:
+```bash
+# Make executable (first time only)
+chmod +x scripts/start_attensync.sh
+
+# Run the unified launcher
+./scripts/start_attensync.sh
+```
+
+### 🎛️ Options:
+```bash
+# Skip RFID hardware (web-only development)
+./scripts/start_attensync.sh --no-rfid
+
+# Skip dependency installation (faster startup)
+./scripts/start_attensync.sh --skip-deps
+```
+
+This will automatically:
+- ✅ Install all dependencies (Python & Node.js packages)
+- 🚀 Start Flask backend server (http://localhost:5000)
+- ⚛️ Start React frontend server (http://localhost:3000)  
+- 📡 Start RFID hardware listener
+- 📊 Display service status and management options
+
 ## 🌟 Key Features
 
 - 🔷 **Real-time RFID Scanning** - ESP32 Bluetooth integration

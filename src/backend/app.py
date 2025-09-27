@@ -18,7 +18,7 @@ import sqlite3
 app = Flask(__name__, static_url_path='', static_folder='static')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 CORS(app, resources={r"/api/*": {
-    "origins": "http://localhost:5000",
+    "origins": "http://localhost:5001",
     "supports_credentials": True
 }})  # Allow React frontend access with credentials
 
@@ -55,22 +55,12 @@ for directory in ['uploads', 'static']:
         os.makedirs(directory)
 
 # Path for the separate RFID scan database
-RFID_DB_PATH = os.path.join(basedir, 'rfid_scans.db')
+# RFID data now stored in main database via models
 
-# Ensure RFID scan database and table exist
+# RFID data now stored in main database via models
 def init_rfid_db():
-    conn = sqlite3.connect(RFID_DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS rfid_scan_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            tag TEXT NOT NULL,
-            student_name TEXT NOT NULL,
-            timestamp TEXT NOT NULL
-        )
-    ''')
-    conn.commit()
-    conn.close()
+    """RFID scans now stored in main database via RFIDScanLog model"""
+    pass
 
 init_rfid_db()
 
@@ -341,24 +331,64 @@ def get_attendance():
     
     attendance_date = datetime.strptime(date_str, '%Y-%m-%d').date()
     
-    # Get attendance records
-    records = Attendance.query.filter(
+    # Get attendance records with student information
+    records = db.session.query(Attendance, Student).join(
+        Student, Attendance.student_id == Student.id
+    ).filter(
         Attendance.class_id == class_id,
         Attendance.attendance_date == attendance_date
     ).all()
     
-    # Format response
-    attendance_data = [{
-        'student_id': record.student_id,
-        'status': record.status,
-        'time_marked': record.time_marked.isoformat(),
-        'method': record.method,
-        'is_verified': record.is_verified
-    } for record in records]
+    # Format response with student details
+    attendance_data = []
+    for attendance, student in records:
+        attendance_data.append({
+            'student_id': student.id,
+            'student_name': student.full_name,
+            'roll_number': student.roll_number,
+            'rfid_tag': student.rfid_tag,
+            'status': attendance.status,
+            'time_marked': attendance.time_marked.isoformat() if attendance.time_marked else None,
+            'method': attendance.method,
+            'is_verified': attendance.is_verified
+        })
     
     return jsonify({
         'date': date_str,
         'class_id': class_id,
+        'records': attendance_data
+    })
+
+@app.route('/api/attendance/today')
+def get_today_attendance():
+    """Get all RFID attendance for today"""
+    today = date.today().strftime('%Y-%m-%d')
+    
+    # Get today's RFID attendance records with student information
+    records = db.session.query(Attendance, Student).join(
+        Student, Attendance.student_id == Student.id
+    ).filter(
+        Attendance.attendance_date == date.today(),
+        Attendance.method == 'rfid'
+    ).order_by(Attendance.time_marked.desc()).all()
+    
+    # Format response
+    attendance_data = []
+    for attendance, student in records:
+        attendance_data.append({
+            'student_id': student.id,
+            'student_name': student.full_name,
+            'roll_number': student.roll_number,
+            'rfid_tag': student.rfid_tag,
+            'status': attendance.status,
+            'time_marked': attendance.time_marked.isoformat() if attendance.time_marked else None,
+            'method': attendance.method,
+            'class_name': student.class_info.name if student.class_info else 'Unknown'
+        })
+    
+    return jsonify({
+        'date': today,
+        'total_rfid_scans': len(attendance_data),
         'records': attendance_data
     })
 
@@ -599,32 +629,48 @@ def trigger_forecast():
     generate_forecast_from_db()
     return jsonify({'success': True, 'message': 'Forecast updated.'})
 
+@app.route('/api/test')
+def test_endpoint():
+    """Simple test endpoint"""
+    return jsonify({'message': 'Backend is working!', 'timestamp': datetime.now().isoformat()})
+
 @app.route('/api/rfid_scans')
 def get_rfid_scans():
-    limit = int(request.args.get('limit', 10))
-    scans = RFIDScanLog.query.order_by(RFIDScanLog.timestamp.desc()).limit(limit).all()
-    return jsonify([
-        {
-            'id': scan.id,
-            'tag': scan.tag,
-            'student_name': scan.student_name,
-            'timestamp': scan.timestamp.strftime('%Y-%m-%d %H:%M:%S')
-        } for scan in scans
-    ])
+    """Get recent RFID attendance records - simplified version"""
+    try:
+        limit = int(request.args.get('limit', 10))
+        
+        # Simple query to get attendance records with RFID method
+        records = Attendance.query.filter(
+            Attendance.method == 'rfid'
+        ).order_by(Attendance.time_marked.desc()).limit(limit).all()
+        
+        scan_data = []
+        for record in records:
+            # Get student info
+            student = Student.query.get(record.student_id)
+            scan_data.append({
+                'id': record.id,
+                'rfid_tag': student.rfid_tag if student else 'Unknown',
+                'student_name': student.full_name if student else 'Unknown Student',
+                'status': record.status,
+                'timestamp': record.time_marked.strftime('%Y-%m-%d %H:%M:%S') if record.time_marked else 'N/A',
+                'date': record.attendance_date.strftime('%Y-%m-%d') if record.attendance_date else 'N/A'
+            })
+        
+        return jsonify({
+            'scans': scan_data,
+            'total': len(scan_data)
+        })
+    except Exception as e:
+        return jsonify({'error': str(e), 'scans': [], 'total': 0}), 500
 
 # Function to log RFID scan in both databases and mark attendance
 def log_rfid_scan(tag, student_name):
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     today = date.today()
     
-    # Insert into rfid_scans.db
-    conn = sqlite3.connect(RFID_DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('INSERT INTO rfid_scan_log (tag, student_name, timestamp) VALUES (?, ?, ?)', (tag, student_name, now))
-    conn.commit()
-    conn.close()
-    
-    # Insert into main attendance_system.db via SQLAlchemy
+    # Insert into main attendance_system.db via SQLAlchemy only
     scan = RFIDScanLog(tag=tag, student_name=student_name, timestamp=datetime.now())
     db.session.add(scan)
     

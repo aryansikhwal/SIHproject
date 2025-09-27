@@ -22,7 +22,7 @@ app.config['SECRET_KEY'] = 'attensync-secret-key-2024'  # Change in production
 basedir = os.path.abspath(os.path.dirname(__file__))
 instance_path = os.path.join(basedir, 'instance')
 os.makedirs(instance_path, exist_ok=True)
-db_path = os.path.join(instance_path, 'attensync.db')
+db_path = os.path.join(instance_path, 'attendance_system.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -510,17 +510,45 @@ def get_rfid_scans():
     """Get recent RFID scan logs"""
     try:
         limit = request.args.get('limit', 50, type=int)
-        status = request.args.get('status')
         
-        query = RFIDScanLog.query
-        if status:
-            query = query.filter_by(status=status)
+        # Direct SQL query as fallback
+        import sqlite3
+        db_path = os.path.join('instance', 'attendance_system.db')
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
         
-        scans = query.order_by(RFIDScanLog.scan_time.desc()).limit(limit).all()
+        # Get today's date in the right format
+        from datetime import date
+        today = date.today().strftime('%Y-%m-%d')
+        
+        cursor.execute('''
+            SELECT r.rfid_tag, r.scan_time, r.status, r.student_id, r.id, 
+                   COALESCE(r.student_name, s.full_name) as student_name
+            FROM rfid_scan_logs r
+            LEFT JOIN students s ON r.student_id = s.id
+            WHERE DATE(r.scan_time) >= DATE('now', '-1 day')
+            ORDER BY r.scan_time DESC 
+            LIMIT ?
+        ''', (limit,))
+        
+        rows = cursor.fetchall()
+        conn.close()
+        
+        scans = []
+        for row in rows:
+            scans.append({
+                'id': row[4],
+                'rfid_tag': row[0],
+                'scan_time': row[1],
+                'status': row[2],
+                'student_id': row[3],
+                'student_name': row[5]  # Now includes student name from JOIN
+            })
         
         return jsonify({
-            'scans': [scan.to_dict() for scan in scans],
-            'total': len(scans)
+            'scans': scans,
+            'total': len(scans),
+            'debug': f'Found {len(scans)} scans since yesterday'
         })
         
     except Exception as e:

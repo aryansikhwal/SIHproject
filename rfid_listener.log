@@ -1,0 +1,888 @@
+2025-09-26 18:19:37,919 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:19:37,935 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:19:37,943 - INFO - [OK] pyserial dependency found
+2025-09-26 18:19:37,944 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:19:37,945 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:19:37,945 - INFO - [OK] pyserial dependency found
+2025-09-26 18:19:37,945 - ERROR - [ERROR] Database setup failed: No module named 'flask'
+2025-09-26 18:19:37,946 - ERROR - [ERROR] Database setup failed
+2025-09-26 18:21:40,256 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:21:40,274 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:21:40,284 - INFO - [OK] pyserial dependency found
+2025-09-26 18:21:40,285 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:21:40,285 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:21:40,285 - INFO - [OK] pyserial dependency found
+2025-09-26 18:21:40,757 - INFO - [OK] Database connection established
+2025-09-26 18:21:40,759 - INFO - [OK] Database tables initialized
+2025-09-26 18:21:40,760 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:21:50,806 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:21:50,806 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:22:00,810 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:22:10,846 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:22:10,846 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:22:20,852 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:22:30,886 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:22:30,886 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:22:40,899 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:22:50,929 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:22:50,929 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:22:59,039 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:23:57,962 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:23:57,980 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:23:57,988 - INFO - [OK] pyserial dependency found
+2025-09-26 18:23:57,989 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:23:57,989 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:23:57,989 - INFO - [OK] pyserial dependency found
+2025-09-26 18:23:58,421 - INFO - [OK] Database connection established
+2025-09-26 18:23:58,423 - INFO - [OK] Database tables initialized
+2025-09-26 18:23:58,423 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:24:08,465 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:24:08,465 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:24:17,383 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:26:17,951 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:26:17,967 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:26:17,975 - INFO - [OK] pyserial dependency found
+2025-09-26 18:26:17,976 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:26:17,976 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:26:17,976 - INFO - [OK] pyserial dependency found
+2025-09-26 18:26:18,397 - INFO - [OK] Database connection established
+2025-09-26 18:26:18,399 - INFO - [OK] Database tables initialized
+2025-09-26 18:26:18,399 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:26:28,455 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:26:30,979 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 18:26:31,083 - ERROR - [ERROR] Connection error: 'BleakClient' object has no attribute 'get_services'
+2025-09-26 18:26:31,083 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:26:41,118 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:26:41,119 - INFO - [INFO] Looking for device name: ESP32_BLE_RFID or address: D4:8A:FC:C7:CF:72
+2025-09-26 18:26:41,119 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:26:44,290 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:27:01,516 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:27:01,532 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:27:01,541 - INFO - [OK] pyserial dependency found
+2025-09-26 18:27:01,542 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:27:01,542 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:27:01,542 - INFO - [OK] pyserial dependency found
+2025-09-26 18:27:01,959 - INFO - [OK] Database connection established
+2025-09-26 18:27:01,961 - INFO - [OK] Database tables initialized
+2025-09-26 18:27:01,961 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:27:12,031 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:27:14,719 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 18:27:14,745 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 18:27:25,799 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:28:02,763 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:28:02,779 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:28:02,787 - INFO - [OK] pyserial dependency found
+2025-09-26 18:28:02,788 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:28:02,788 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:28:02,788 - INFO - [OK] pyserial dependency found
+2025-09-26 18:28:03,201 - INFO - [OK] Database connection established
+2025-09-26 18:28:03,203 - INFO - [OK] Database tables initialized
+2025-09-26 18:28:03,203 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:28:13,249 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:28:15,206 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 18:28:15,232 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 18:28:25,188 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 18:28:25,199 - ERROR - [ERROR] Database error: 'rfid_uid' is an invalid keyword argument for RFIDScanLog
+2025-09-26 18:28:25,199 - ERROR - [ERROR] Error processing RFID data: Working outside of application context.
+
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+2025-09-26 18:29:40,832 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:29:40,849 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:29:40,857 - INFO - [OK] pyserial dependency found
+2025-09-26 18:29:40,858 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:29:40,858 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:29:40,858 - INFO - [OK] pyserial dependency found
+2025-09-26 18:29:41,273 - INFO - [OK] Database connection established
+2025-09-26 18:29:41,275 - INFO - [OK] Database tables initialized
+2025-09-26 18:29:41,275 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:29:51,331 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:29:53,602 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 18:29:53,628 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 18:29:56,784 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 18:29:56,805 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 18:30:01,307 - INFO - [RFID] Card detected: 2E401405
+2025-09-26 18:30:01,310 - INFO - [DUPLICATE] Priya Patel already marked present today
+2025-09-26 18:30:07,750 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:43:38,542 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:43:38,558 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:43:38,566 - INFO - [OK] pyserial dependency found
+2025-09-26 18:43:38,567 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:43:38,567 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:43:38,567 - INFO - [OK] pyserial dependency found
+2025-09-26 18:43:38,984 - INFO - [OK] Database connection established
+2025-09-26 18:43:38,986 - INFO - [OK] Database tables initialized
+2025-09-26 18:43:38,986 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:43:49,035 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:43:49,268 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 18:43:49,268 - ERROR - [ERROR] RFID service 12345678-1234-1234-1234-1234567890ab not found on ESP32
+2025-09-26 18:43:49,268 - INFO - [INFO] Available services:
+2025-09-26 18:43:49,268 - INFO -   Service: 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 18:43:49,268 - INFO -     Char: 00002a05-0000-1000-8000-00805f9b34fb (indicate)
+2025-09-26 18:43:49,268 - INFO -   Service: 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 18:43:49,269 - INFO -     Char: 00002a00-0000-1000-8000-00805f9b34fb (read)
+2025-09-26 18:43:49,269 - INFO -     Char: 00002a01-0000-1000-8000-00805f9b34fb (read)
+2025-09-26 18:43:49,269 - INFO -     Char: 00002aa6-0000-1000-8000-00805f9b34fb (read)
+2025-09-26 18:43:49,372 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:43:59,401 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:44:01,511 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 18:44:01,538 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 18:44:13,430 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 18:44:13,453 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 18:44:21,397 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:44:21,413 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:44:21,421 - INFO - [OK] pyserial dependency found
+2025-09-26 18:44:21,422 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:44:21,422 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:44:21,422 - INFO - [OK] pyserial dependency found
+2025-09-26 18:44:21,854 - INFO - [OK] Database connection established
+2025-09-26 18:44:21,858 - INFO - [OK] Database tables initialized
+2025-09-26 18:44:21,858 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:44:31,917 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:44:32,164 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 18:44:32,164 - INFO - [INFO] Available services:
+2025-09-26 18:44:32,164 - INFO -   Service: 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 18:44:32,164 - INFO -     Char: 00002a05-0000-1000-8000-00805f9b34fb (indicate)
+2025-09-26 18:44:32,164 - INFO -   Service: 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 18:44:32,165 - INFO -     Char: 00002a00-0000-1000-8000-00805f9b34fb (read)
+2025-09-26 18:44:32,165 - INFO -     Char: 00002a01-0000-1000-8000-00805f9b34fb (read)
+2025-09-26 18:44:32,165 - INFO -     Char: 00002aa6-0000-1000-8000-00805f9b34fb (read)
+2025-09-26 18:44:32,165 - INFO - [SETUP] Using characteristic: 00002a05-0000-1000-8000-00805f9b34fb for notifications
+2025-09-26 18:44:32,275 - ERROR - [ERROR] Connection error: Could not start notify on 0002: Access Denied
+2025-09-26 18:44:32,275 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:44:37,699 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:47:38,295 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:47:38,311 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:47:38,319 - INFO - [OK] pyserial dependency found
+2025-09-26 18:47:38,320 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:47:38,321 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:47:38,321 - INFO - [OK] pyserial dependency found
+2025-09-26 18:47:38,752 - INFO - [OK] Database connection established
+2025-09-26 18:47:38,754 - INFO - [OK] Database tables initialized
+2025-09-26 18:47:38,754 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:47:48,811 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:47:50,959 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 18:47:51,064 - ERROR - [ERROR] Connection error: object of type 'BleakGATTServiceCollection' has no len()
+2025-09-26 18:47:51,065 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:47:56,979 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:49:12,271 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:49:12,287 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:49:12,296 - INFO - [OK] pyserial dependency found
+2025-09-26 18:49:12,297 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:49:12,297 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:49:12,297 - INFO - [OK] pyserial dependency found
+2025-09-26 18:49:12,741 - INFO - [OK] Database connection established
+2025-09-26 18:49:12,743 - INFO - [OK] Database tables initialized
+2025-09-26 18:49:12,743 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:49:22,812 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:49:32,843 - ERROR - [ERROR] Connection error: Device with address D4:8A:FC:C7:CF:72 was not found.
+2025-09-26 18:49:32,843 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:49:42,865 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:49:42,865 - INFO - [INFO] Looking for device name: ESP32_BLE_RFID or address: D4:8A:FC:C7:CF:72
+2025-09-26 18:49:42,865 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:49:52,880 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:50:02,910 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:50:05,008 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 18:50:05,009 - INFO - [INFO] Found 3 services on ESP32
+2025-09-26 18:50:05,009 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 18:50:05,009 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-26 18:50:05,009 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 18:50:05,009 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 18:50:05,009 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 18:50:05,009 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 18:50:05,009 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-26 18:50:05,009 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-26 18:50:05,009 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 18:50:05,035 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 18:50:05,035 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 18:50:11,814 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 18:50:11,835 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 18:50:15,615 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:51:47,681 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:51:47,698 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:51:47,707 - INFO - [OK] pyserial dependency found
+2025-09-26 18:51:47,708 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:51:47,708 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:51:47,708 - INFO - [OK] pyserial dependency found
+2025-09-26 18:51:48,145 - INFO - [OK] Database connection established
+2025-09-26 18:51:48,147 - INFO - [OK] Database tables initialized
+2025-09-26 18:51:48,147 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:51:58,198 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:51:58,199 - INFO - [INFO] Looking for device name: ESP32_BLE_RFID or address: D4:8A:FC:C7:CF:72
+2025-09-26 18:51:58,199 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:52:08,207 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:52:18,232 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:52:18,233 - INFO - [INFO] Looking for device name: ESP32_BLE_RFID or address: D4:8A:FC:C7:CF:72
+2025-09-26 18:52:18,233 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:52:24,697 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:54:11,577 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:54:11,594 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:54:11,602 - INFO - [OK] pyserial dependency found
+2025-09-26 18:54:11,603 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:54:11,603 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:54:11,603 - INFO - [OK] pyserial dependency found
+2025-09-26 18:54:11,992 - ERROR - [ERROR] Database setup failed: No module named 'flask_login'
+2025-09-26 18:54:11,993 - ERROR - [ERROR] Database setup failed
+2025-09-26 18:56:35,563 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:56:35,579 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:56:35,587 - INFO - [OK] pyserial dependency found
+2025-09-26 18:56:35,588 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:56:35,588 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:56:35,588 - INFO - [OK] pyserial dependency found
+2025-09-26 18:56:35,981 - ERROR - [ERROR] Database setup failed: No module named 'flask_login'
+2025-09-26 18:56:35,981 - ERROR - [ERROR] Database setup failed
+2025-09-26 18:58:05,946 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:58:05,963 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:58:05,972 - INFO - [OK] pyserial dependency found
+2025-09-26 18:58:05,974 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:58:05,974 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:58:05,974 - INFO - [OK] pyserial dependency found
+2025-09-26 18:58:06,415 - INFO - [OK] Database connection established
+2025-09-26 18:58:06,417 - INFO - [OK] Database tables initialized
+2025-09-26 18:58:06,417 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:58:16,471 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:58:16,471 - INFO - [INFO] Looking for device name: ESP32_BLE_RFID or address: D4:8A:FC:C7:CF:72
+2025-09-26 18:58:16,471 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:58:26,482 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:58:36,503 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 18:58:46,543 - ERROR - [ERROR] Connection error: Device with address D4:8A:FC:C7:CF:72 was not found.
+2025-09-26 18:58:46,544 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 18:58:56,574 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 18:58:56,574 - INFO - [INFO] Looking for device name: ESP32_BLE_RFID or address: D4:8A:FC:C7:CF:72
+2025-09-26 18:58:56,575 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-26 18:59:01,310 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 18:59:29,812 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:59:29,829 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:59:29,837 - INFO - [OK] pyserial dependency found
+2025-09-26 18:59:29,838 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:59:29,838 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:59:29,838 - INFO - [OK] pyserial dependency found
+2025-09-26 18:59:30,224 - ERROR - [ERROR] Database setup failed: No module named 'flask_login'
+2025-09-26 18:59:30,225 - ERROR - [ERROR] Database setup failed
+2025-09-26 18:59:59,399 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 18:59:59,414 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:59:59,423 - INFO - [OK] pyserial dependency found
+2025-09-26 18:59:59,425 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 18:59:59,425 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 18:59:59,425 - INFO - [OK] pyserial dependency found
+2025-09-26 18:59:59,806 - ERROR - [ERROR] Database setup failed: No module named 'flask_login'
+2025-09-26 18:59:59,806 - ERROR - [ERROR] Database setup failed
+2025-09-26 19:00:28,148 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 19:00:28,166 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:00:28,174 - INFO - [OK] pyserial dependency found
+2025-09-26 19:00:28,176 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 19:00:28,176 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:00:28,176 - INFO - [OK] pyserial dependency found
+2025-09-26 19:00:28,638 - INFO - [OK] Database connection established
+2025-09-26 19:00:28,641 - INFO - [OK] Database tables initialized
+2025-09-26 19:00:28,641 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 19:00:38,821 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 19:00:40,907 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 19:00:40,908 - INFO - [INFO] Found 3 services on ESP32
+2025-09-26 19:00:40,908 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 19:00:40,908 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-26 19:00:40,908 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 19:00:40,908 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:00:40,908 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:00:40,908 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:00:40,909 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-26 19:00:40,909 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-26 19:00:40,909 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:00:40,934 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:00:40,934 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 19:00:47,548 - INFO - [RFID] Card detected: 2E401405
+2025-09-26 19:00:47,570 - INFO - [DUPLICATE] Priya Patel already marked present today
+2025-09-26 19:02:00,601 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 19:29:19,790 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 19:29:19,807 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:29:19,816 - INFO - [OK] pyserial dependency found
+2025-09-26 19:29:19,817 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 19:29:19,817 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:29:19,817 - INFO - [OK] pyserial dependency found
+2025-09-26 19:29:20,257 - INFO - [OK] Database connection established
+2025-09-26 19:29:20,258 - INFO - [OK] Database tables initialized
+2025-09-26 19:29:20,259 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 19:29:30,321 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 19:29:32,303 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 19:29:32,303 - INFO - [INFO] Found 3 services on ESP32
+2025-09-26 19:29:32,303 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 19:29:32,303 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-26 19:29:32,304 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 19:29:32,304 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:29:32,304 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:29:32,304 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:29:32,304 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-26 19:29:32,304 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-26 19:29:32,304 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:29:32,329 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:29:32,329 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 19:29:41,268 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:29:41,290 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:29:48,271 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 19:33:14,083 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 19:33:14,099 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:33:14,107 - INFO - [OK] pyserial dependency found
+2025-09-26 19:33:14,108 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 19:33:14,108 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:33:14,108 - INFO - [OK] pyserial dependency found
+2025-09-26 19:33:14,549 - INFO - [OK] Database connection established
+2025-09-26 19:33:14,551 - INFO - [OK] Database tables initialized
+2025-09-26 19:33:14,551 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 19:33:24,603 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 19:33:26,975 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 19:33:26,975 - INFO - [INFO] Found 3 services on ESP32
+2025-09-26 19:33:26,975 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 19:33:26,975 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-26 19:33:26,975 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 19:33:26,976 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:33:26,976 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:33:26,976 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:33:26,976 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-26 19:33:26,976 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['notify', 'read']
+2025-09-26 19:33:26,976 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:33:27,016 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:33:27,016 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 19:33:28,943 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:33:28,965 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:33:43,888 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 19:39:23,738 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 19:39:23,754 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:39:23,758 - INFO - [OK] pyserial dependency found
+2025-09-26 19:39:23,759 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 19:39:23,760 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:39:23,760 - INFO - [OK] pyserial dependency found
+2025-09-26 19:39:24,225 - INFO - [OK] Database connection established
+2025-09-26 19:39:24,228 - INFO - [OK] Database tables initialized
+2025-09-26 19:39:24,228 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 19:39:34,282 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 19:39:36,603 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 19:39:36,603 - INFO - [INFO] Found 3 services on ESP32
+2025-09-26 19:39:36,603 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 19:39:36,603 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-26 19:39:36,604 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 19:39:36,604 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:39:36,604 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:39:36,604 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:39:36,604 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-26 19:39:36,604 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-26 19:39:36,604 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:39:36,630 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:39:36,630 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 19:39:39,507 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:39:39,529 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:39:50,318 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 19:40:18,799 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 19:40:18,814 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:40:18,818 - INFO - [OK] pyserial dependency found
+2025-09-26 19:40:18,819 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 19:40:18,820 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:40:18,820 - INFO - [OK] pyserial dependency found
+2025-09-26 19:40:19,231 - INFO - [OK] Database connection established
+2025-09-26 19:40:19,233 - INFO - [OK] Database tables initialized
+2025-09-26 19:40:19,234 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 19:40:29,295 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 19:40:31,521 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 19:40:31,521 - INFO - [INFO] Found 3 services on ESP32
+2025-09-26 19:40:31,521 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 19:40:31,522 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-26 19:40:31,522 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 19:40:31,522 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:40:31,522 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:40:31,522 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:40:31,522 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-26 19:40:31,523 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-26 19:40:31,523 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:40:31,548 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:40:31,548 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 19:40:33,232 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:40:33,254 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:40:39,664 - INFO - [RFID] Card detected: 2E401405
+2025-09-26 19:40:39,667 - INFO - [DUPLICATE] Priya Patel already marked present today
+2025-09-26 19:40:47,895 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 19:42:45,898 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 19:42:45,913 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:42:45,917 - INFO - [OK] pyserial dependency found
+2025-09-26 19:42:45,918 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 19:42:45,918 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:42:45,919 - INFO - [OK] pyserial dependency found
+2025-09-26 19:42:46,347 - INFO - [OK] Database connection established
+2025-09-26 19:42:46,349 - INFO - [OK] Database tables initialized
+2025-09-26 19:42:46,349 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 19:42:56,399 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 19:42:58,536 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 19:42:58,537 - INFO - [INFO] Found 3 services on ESP32
+2025-09-26 19:42:58,537 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 19:42:58,537 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-26 19:42:58,537 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 19:42:58,537 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:42:58,537 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:42:58,537 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:42:58,537 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-26 19:42:58,538 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-26 19:42:58,538 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:42:58,563 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:42:58,564 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 19:43:00,496 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:43:00,518 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:43:02,963 - INFO - [RFID] Card detected: 2E401405
+2025-09-26 19:43:02,966 - INFO - [DUPLICATE] Priya Patel already marked present today
+2025-09-26 19:43:15,023 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 19:45:26,051 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 19:45:26,067 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:45:26,072 - INFO - [OK] pyserial dependency found
+2025-09-26 19:45:26,073 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 19:45:26,074 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:45:26,074 - INFO - [OK] pyserial dependency found
+2025-09-26 19:45:26,543 - INFO - [OK] Database connection established
+2025-09-26 19:45:26,545 - INFO - [OK] Database tables initialized
+2025-09-26 19:45:26,546 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 19:45:36,613 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 19:45:39,178 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 19:45:39,179 - INFO - [INFO] Found 3 services on ESP32
+2025-09-26 19:45:39,179 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 19:45:39,179 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-26 19:45:39,179 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 19:45:39,179 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:45:39,179 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:45:39,180 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:45:39,180 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-26 19:45:39,180 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['notify', 'read']
+2025-09-26 19:45:39,180 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:45:39,205 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:45:39,206 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 19:45:41,016 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:45:41,038 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:45:45,714 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:45:45,717 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:46:28,852 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:46:28,855 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:46:30,453 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:46:30,457 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:46:31,591 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:46:31,594 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:46:47,503 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 19:51:20,410 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 19:51:20,427 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:51:20,431 - INFO - [OK] pyserial dependency found
+2025-09-26 19:51:20,432 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 19:51:20,433 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:51:20,433 - INFO - [OK] pyserial dependency found
+2025-09-26 19:51:20,898 - INFO - [OK] Database connection established
+2025-09-26 19:51:20,901 - INFO - [OK] Database tables initialized
+2025-09-26 19:51:20,901 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 19:51:30,974 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-26 19:51:33,092 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-26 19:51:33,092 - INFO - [INFO] Found 3 services on ESP32
+2025-09-26 19:51:33,092 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-26 19:51:33,093 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-26 19:51:33,093 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-26 19:51:33,093 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:51:33,093 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:51:33,093 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-26 19:51:33,093 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-26 19:51:33,093 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['notify', 'read']
+2025-09-26 19:51:33,093 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:51:33,118 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-26 19:51:33,118 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-26 19:51:34,561 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:51:34,583 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:51:36,809 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:51:36,812 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:51:37,841 - INFO - [RFID] Card detected: E4F8E400
+2025-09-26 19:51:37,844 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-26 19:52:04,300 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-26 19:53:14,621 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-26 19:53:14,638 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:53:14,643 - INFO - [OK] pyserial dependency found
+2025-09-26 19:53:14,644 - INFO - [START] Starting AttenSync RFID System...
+2025-09-26 19:53:14,644 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-26 19:53:14,644 - INFO - [OK] pyserial dependency found
+2025-09-26 19:53:15,107 - INFO - [OK] Database connection established
+2025-09-26 19:53:15,109 - INFO - [OK] Database tables initialized
+2025-09-26 19:53:15,109 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-26 19:53:25,160 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-26 19:53:25,160 - INFO - [INFO] Looking for device name: ESP32_BLE_RFID or address: D4:8A:FC:C7:CF:72
+2025-09-26 19:53:25,161 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-27 10:57:16,737 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 10:57:16,753 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 10:57:16,757 - INFO - [OK] pyserial dependency found
+2025-09-27 10:57:16,760 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 10:57:16,760 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 10:57:16,760 - INFO - [OK] pyserial dependency found
+2025-09-27 10:57:17,280 - INFO - [OK] Database connection established
+2025-09-27 10:57:17,290 - INFO - [OK] Database tables initialized
+2025-09-27 10:57:17,290 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 10:57:27,464 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 10:57:29,568 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 10:57:29,568 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 10:57:29,568 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 10:57:29,568 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 10:57:29,568 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 10:57:29,568 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 10:57:29,568 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 10:57:29,568 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 10:57:29,568 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 10:57:29,569 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-27 10:57:29,569 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 10:57:29,597 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 10:57:29,597 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 10:57:31,640 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 10:57:31,662 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 10:57:34,194 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 10:57:34,197 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 10:58:02,183 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:06:48,949 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:06:48,968 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:06:48,972 - INFO - [OK] pyserial dependency found
+2025-09-27 11:06:48,973 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:06:48,973 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:06:48,973 - INFO - [OK] pyserial dependency found
+2025-09-27 11:06:49,414 - INFO - [OK] Database connection established
+2025-09-27 11:06:49,416 - INFO - [OK] Database tables initialized
+2025-09-27 11:06:49,416 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:06:59,460 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:07:01,968 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:07:01,968 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:07:01,968 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:07:01,969 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:07:01,969 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:07:01,969 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:07:01,969 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:07:01,969 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:07:01,969 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:07:01,969 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-27 11:07:01,969 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:07:01,995 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:07:01,995 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:07:03,589 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:07:03,611 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:07:06,533 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:07:06,537 - INFO - [SUCCESS] Attendance marked for Priya Patel
+2025-09-27 11:07:34,116 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:08:53,842 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:08:53,858 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:08:53,862 - INFO - [OK] pyserial dependency found
+2025-09-27 11:08:53,864 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:08:53,864 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:08:53,864 - INFO - [OK] pyserial dependency found
+2025-09-27 11:08:54,321 - INFO - [OK] Database connection established
+2025-09-27 11:08:54,323 - INFO - [OK] Database tables initialized
+2025-09-27 11:08:54,323 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:09:04,387 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-27 11:09:04,387 - INFO - [INFO] Looking for device name: ESP32_BLE_RFID or address: D4:8A:FC:C7:CF:72
+2025-09-27 11:09:04,387 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-27 11:09:14,403 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:09:24,435 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:09:26,385 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:09:26,385 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:09:26,386 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:09:26,386 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:09:26,386 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:09:26,386 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:09:26,386 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:09:26,386 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:09:26,386 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:09:26,386 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-27 11:09:26,387 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:09:26,412 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:09:26,412 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:09:27,917 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:09:27,937 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:09:29,010 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:09:29,013 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:09:52,303 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:09:52,306 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:09:53,598 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:09:53,602 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:09:55,216 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:09:55,220 - INFO - [SUCCESS] Attendance marked for Priya Patel
+2025-09-27 11:09:56,792 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:09:56,795 - INFO - [SUCCESS] Attendance marked for Priya Patel
+2025-09-27 11:09:58,148 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:09:58,151 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:10:28,353 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:10:28,357 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:10:32,116 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:10:32,120 - INFO - [SUCCESS] Attendance marked for Priya Patel
+2025-09-27 11:10:35,134 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:10:35,137 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:10:54,600 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:15:50,540 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:15:50,555 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:15:50,559 - INFO - [OK] pyserial dependency found
+2025-09-27 11:15:50,560 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:15:50,560 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:15:50,560 - INFO - [OK] pyserial dependency found
+2025-09-27 11:15:50,993 - INFO - [OK] Database connection established
+2025-09-27 11:15:50,995 - INFO - [OK] Database tables initialized
+2025-09-27 11:15:50,995 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:16:01,046 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:16:03,096 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:16:03,096 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:16:03,096 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:16:03,096 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:16:03,096 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:16:03,097 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:16:03,097 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:16:03,097 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:16:03,097 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:16:03,097 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-27 11:16:03,097 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:16:03,123 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:16:03,123 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:16:05,874 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:16:05,897 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:16:06,968 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:16:06,972 - INFO - [SUCCESS] Attendance marked for Priya Patel
+2025-09-27 11:16:09,873 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:16:09,876 - INFO - [SUCCESS] Attendance marked for Priya Patel
+2025-09-27 11:16:11,168 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:16:11,171 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:16:14,595 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:19:28,537 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:19:28,554 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:19:28,558 - INFO - [OK] pyserial dependency found
+2025-09-27 11:19:28,559 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:19:28,559 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:19:28,559 - INFO - [OK] pyserial dependency found
+2025-09-27 11:19:28,995 - INFO - [OK] Database connection established
+2025-09-27 11:19:28,997 - INFO - [OK] Database tables initialized
+2025-09-27 11:19:28,997 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:19:39,056 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:19:41,536 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:19:41,536 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:19:41,536 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:19:41,536 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:19:41,536 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:19:41,536 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:19:41,536 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:19:41,537 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:19:41,537 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:19:41,537 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['notify', 'read']
+2025-09-27 11:19:41,537 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:19:41,563 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:19:41,563 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:19:54,303 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:19:54,323 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:19:58,504 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:19:58,507 - INFO - [SUCCESS] Attendance marked for Priya Patel
+2025-09-27 11:20:14,016 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:26:52,033 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:26:52,050 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:26:52,055 - INFO - [OK] pyserial dependency found
+2025-09-27 11:26:52,056 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:26:52,056 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:26:52,056 - INFO - [OK] pyserial dependency found
+2025-09-27 11:26:52,500 - INFO - [OK] Database connection established
+2025-09-27 11:26:52,502 - INFO - [OK] Database tables initialized
+2025-09-27 11:26:52,503 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:27:02,571 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:27:04,906 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:27:04,907 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:27:04,907 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:27:04,907 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:27:04,907 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:27:04,907 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:27:04,907 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:27:04,908 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:27:04,908 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:27:04,908 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-27 11:27:04,908 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:27:04,933 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:27:04,933 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:27:56,549 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:27:56,572 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-27 11:28:00,181 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:28:00,184 - INFO - [DUPLICATE] Priya Patel already marked present today
+2025-09-27 11:28:18,256 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:31:44,206 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:31:44,222 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:31:44,226 - INFO - [OK] pyserial dependency found
+2025-09-27 11:31:44,227 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:31:44,228 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:31:44,228 - INFO - [OK] pyserial dependency found
+2025-09-27 11:31:44,656 - INFO - [OK] Database connection established
+2025-09-27 11:31:44,681 - INFO - [OK] Database tables initialized
+2025-09-27 11:31:44,681 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:31:54,739 - WARNING - [WARNING] ESP32 RFID device not found
+2025-09-27 11:31:54,739 - INFO - [INFO] Looking for device name: ESP32_BLE_RFID or address: D4:8A:FC:C7:CF:72
+2025-09-27 11:31:54,739 - INFO - [RETRY] Retrying in 10 seconds...
+2025-09-27 11:32:04,741 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:32:14,761 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:32:17,373 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:32:17,373 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:32:17,373 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:32:17,373 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:32:17,373 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:32:17,373 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:32:17,374 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:32:17,374 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:32:17,374 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:32:17,374 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['notify', 'read']
+2025-09-27 11:32:17,374 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:32:17,400 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:32:17,400 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:32:23,149 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:32:23,170 - WARNING - [UNKNOWN] Unknown RFID card: E4F8E400
+2025-09-27 11:32:26,212 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:32:26,214 - WARNING - [UNKNOWN] Unknown RFID card: 2E401405
+2025-09-27 11:32:29,723 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:37:06,453 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:37:06,469 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:37:06,473 - INFO - [OK] pyserial dependency found
+2025-09-27 11:37:06,474 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:37:06,474 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:37:06,474 - INFO - [OK] pyserial dependency found
+2025-09-27 11:37:06,884 - INFO - [OK] Database connection established
+2025-09-27 11:37:06,886 - INFO - [OK] Database tables initialized
+2025-09-27 11:37:06,886 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:37:16,933 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:37:19,275 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:37:19,275 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:37:19,275 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:37:19,275 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:37:19,275 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:37:19,275 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:37:19,275 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:37:19,276 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:37:19,276 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:37:19,276 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['notify', 'read']
+2025-09-27 11:37:19,276 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:37:19,302 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:37:19,302 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:37:23,047 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:37:23,067 - WARNING - [UNKNOWN] Unknown RFID card: E4F8E400
+2025-09-27 11:37:27,204 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:37:27,208 - WARNING - [UNKNOWN] Unknown RFID card: 2E401405
+2025-09-27 11:37:28,235 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:37:28,240 - WARNING - [UNKNOWN] Unknown RFID card: 2E401405
+2025-09-27 11:37:40,687 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:40:59,315 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:40:59,333 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:40:59,338 - INFO - [OK] pyserial dependency found
+2025-09-27 11:40:59,339 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:40:59,339 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:40:59,339 - INFO - [OK] pyserial dependency found
+2025-09-27 11:40:59,795 - INFO - [OK] Database connection established
+2025-09-27 11:40:59,802 - INFO - [OK] Database tables initialized
+2025-09-27 11:40:59,803 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:41:09,864 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:41:12,173 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:41:12,173 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:41:12,173 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:41:12,173 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:41:12,173 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:41:12,174 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:41:12,174 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:41:12,174 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:41:12,174 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:41:12,174 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['read', 'notify']
+2025-09-27 11:41:12,174 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:41:12,199 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:41:12,199 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:41:13,272 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:41:13,292 - ERROR - [ERROR] Database error: (sqlite3.OperationalError) no such column: students.gender
+[SQL: SELECT students.id AS students_id, students.roll_number AS students_roll_number, students.rfid_tag AS students_rfid_tag, students.full_name AS students_full_name, students.date_of_birth AS students_date_of_birth, students.gender AS students_gender, students.class_id AS students_class_id, students.parent_contact AS students_parent_contact, students.parent_email AS students_parent_email, students.address AS students_address, students.is_active AS students_is_active, students.enrollment_date AS students_enrollment_date, students.created_at AS students_created_at 
+FROM students 
+WHERE students.rfid_tag = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('E4F8E400', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-27 11:41:15,955 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:41:15,959 - ERROR - [ERROR] Database error: (sqlite3.OperationalError) no such column: students.gender
+[SQL: SELECT students.id AS students_id, students.roll_number AS students_roll_number, students.rfid_tag AS students_rfid_tag, students.full_name AS students_full_name, students.date_of_birth AS students_date_of_birth, students.gender AS students_gender, students.class_id AS students_class_id, students.parent_contact AS students_parent_contact, students.parent_email AS students_parent_email, students.address AS students_address, students.is_active AS students_is_active, students.enrollment_date AS students_enrollment_date, students.created_at AS students_created_at 
+FROM students 
+WHERE students.rfid_tag = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('2E401405', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-27 11:41:16,943 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:41:16,946 - ERROR - [ERROR] Database error: (sqlite3.OperationalError) no such column: students.gender
+[SQL: SELECT students.id AS students_id, students.roll_number AS students_roll_number, students.rfid_tag AS students_rfid_tag, students.full_name AS students_full_name, students.date_of_birth AS students_date_of_birth, students.gender AS students_gender, students.class_id AS students_class_id, students.parent_contact AS students_parent_contact, students.parent_email AS students_parent_email, students.address AS students_address, students.is_active AS students_is_active, students.enrollment_date AS students_enrollment_date, students.created_at AS students_created_at 
+FROM students 
+WHERE students.rfid_tag = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('2E401405', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-27 11:41:20,899 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:41:20,901 - ERROR - [ERROR] Database error: (sqlite3.OperationalError) no such column: students.gender
+[SQL: SELECT students.id AS students_id, students.roll_number AS students_roll_number, students.rfid_tag AS students_rfid_tag, students.full_name AS students_full_name, students.date_of_birth AS students_date_of_birth, students.gender AS students_gender, students.class_id AS students_class_id, students.parent_contact AS students_parent_contact, students.parent_email AS students_parent_email, students.address AS students_address, students.is_active AS students_is_active, students.enrollment_date AS students_enrollment_date, students.created_at AS students_created_at 
+FROM students 
+WHERE students.rfid_tag = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('2E401405', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-27 11:41:47,386 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:42:19,430 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:42:19,445 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:42:19,449 - INFO - [OK] pyserial dependency found
+2025-09-27 11:42:19,450 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:42:19,450 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:42:19,450 - INFO - [OK] pyserial dependency found
+2025-09-27 11:42:19,858 - INFO - [OK] Database connection established
+2025-09-27 11:42:19,861 - INFO - [OK] Database tables initialized
+2025-09-27 11:42:19,861 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:42:29,913 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:42:31,876 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:42:31,876 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:42:31,877 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:42:31,877 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:42:31,877 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:42:31,877 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:42:31,877 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:42:31,877 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:42:31,877 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:42:31,877 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['notify', 'read']
+2025-09-27 11:42:31,877 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:42:31,904 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:42:31,904 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:42:33,554 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:42:33,578 - ERROR - [ERROR] Database error: (sqlite3.OperationalError) no such column: attendance.created_at
+[SQL: SELECT attendance.id AS attendance_id, attendance.student_id AS attendance_student_id, attendance.class_id AS attendance_class_id, attendance.teacher_id AS attendance_teacher_id, attendance.attendance_date AS attendance_attendance_date, attendance.time_marked AS attendance_time_marked, attendance.status AS attendance_status, attendance.method AS attendance_method, attendance.confidence_score AS attendance_confidence_score, attendance.notes AS attendance_notes, attendance.created_at AS attendance_created_at, attendance.updated_at AS attendance_updated_at 
+FROM attendance 
+WHERE attendance.student_id = ? AND attendance.attendance_date = ?
+ LIMIT ? OFFSET ?]
+[parameters: (21, '2025-09-27', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-27 11:42:36,420 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:42:36,423 - ERROR - [ERROR] Database error: (sqlite3.OperationalError) no such column: attendance.created_at
+[SQL: SELECT attendance.id AS attendance_id, attendance.student_id AS attendance_student_id, attendance.class_id AS attendance_class_id, attendance.teacher_id AS attendance_teacher_id, attendance.attendance_date AS attendance_attendance_date, attendance.time_marked AS attendance_time_marked, attendance.status AS attendance_status, attendance.method AS attendance_method, attendance.confidence_score AS attendance_confidence_score, attendance.notes AS attendance_notes, attendance.created_at AS attendance_created_at, attendance.updated_at AS attendance_updated_at 
+FROM attendance 
+WHERE attendance.student_id = ? AND attendance.attendance_date = ?
+ LIMIT ? OFFSET ?]
+[parameters: (22, '2025-09-27', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-27 11:42:49,316 - INFO - [SHUTDOWN] RFID System shutdown
+2025-09-27 11:48:09,991 - INFO - [INIT] AttenSync RFID System Starting...
+2025-09-27 11:48:10,008 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:48:10,015 - INFO - [OK] pyserial dependency found
+2025-09-27 11:48:10,016 - INFO - [START] Starting AttenSync RFID System...
+2025-09-27 11:48:10,017 - INFO - [OK] bleak (Bluetooth LE) dependency found
+2025-09-27 11:48:10,017 - INFO - [OK] pyserial dependency found
+2025-09-27 11:48:10,466 - INFO - [OK] Database connection established
+2025-09-27 11:48:10,468 - INFO - [OK] Database tables initialized
+2025-09-27 11:48:10,468 - INFO - [SCAN] Scanning for ESP32 RFID device...
+2025-09-27 11:48:20,520 - INFO - [FOUND] ESP32: ESP32_BLE_RFID (D4:8A:FC:C7:CF:72)
+2025-09-27 11:48:23,058 - INFO - [CONNECT] Connected to ESP32_BLE_RFID
+2025-09-27 11:48:23,058 - INFO - [INFO] Found 3 services on ESP32
+2025-09-27 11:48:23,059 - INFO - [SERVICE] 00001801-0000-1000-8000-00805f9b34fb
+2025-09-27 11:48:23,059 - INFO -   [CHAR] 00002a05-0000-1000-8000-00805f9b34fb - ['indicate']
+2025-09-27 11:48:23,059 - INFO - [SERVICE] 00001800-0000-1000-8000-00805f9b34fb
+2025-09-27 11:48:23,059 - INFO -   [CHAR] 00002a00-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:48:23,059 - INFO -   [CHAR] 00002a01-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:48:23,059 - INFO -   [CHAR] 00002aa6-0000-1000-8000-00805f9b34fb - ['read']
+2025-09-27 11:48:23,059 - INFO - [SERVICE] 12345678-1234-1234-1234-1234567890ab
+2025-09-27 11:48:23,059 - INFO -   [CHAR] abcd1234-5678-90ab-cdef-1234567890ab - ['notify', 'read']
+2025-09-27 11:48:23,059 - INFO - [SETUP] Attempting to setup notifications on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:48:23,085 - INFO - [SUCCESS] Notifications started on abcd1234-5678-90ab-cdef-1234567890ab
+2025-09-27 11:48:23,085 - INFO - [LISTEN] Listening for RFID cards...
+2025-09-27 11:48:24,226 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:48:24,250 - INFO - [SUCCESS] Attendance marked for Arjun Sharma
+2025-09-27 11:48:26,129 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:48:26,132 - INFO - [SUCCESS] Attendance marked for Priya Patel
+2025-09-27 11:48:37,917 - INFO - [RFID] Card detected: E4F8E400
+2025-09-27 11:48:37,920 - INFO - [DUPLICATE] Arjun Sharma already marked present today
+2025-09-27 11:48:40,718 - INFO - [RFID] Card detected: 2E401405
+2025-09-27 11:48:40,721 - INFO - [DUPLICATE] Priya Patel already marked present today
+2025-09-27 11:50:30,972 - INFO - [SHUTDOWN] RFID System shutdown

@@ -1,22 +1,27 @@
 """
-Fresh RFID Listener for AttenSync
-Clean implementation with proper database logging and error handling
+AttenSync # Configure logging with minimal console output
+logging.basicConfig(
+    level=logging.WARNING,  # Only show warnings and errors in console
+    format='%(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('rfid_listener.log', level=logging.INFO),  # Full logs to file
+        logging.StreamHandler()  # Minimal logs to console
+    ]
+)em - Windows Compatible Version
+Handles missing dependencies gracefully and works with reorganized structure
 """
-import asyncio
-from bleak import BleakScanner, BleakClient
 import sys
 import os
-from datetime import datetime, date
 import logging
+import asyncio
+from datetime import datetime, date
+import colorama
+from colorama import Fore, Back, Style
 
-# Add the project root to Python path
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Initialize colorama for Windows
+colorama.init()
 
-# Import models with proper Flask app context
-from flask import Flask
-from models import db, Student, Attendance, RFIDScanLog, init_database
-
-# Configure logging
+# Configure logging without Unicode characters
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -28,328 +33,462 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# ESP32 Configuration
-ESP32_CONFIG = {
-    'service_uuid': "12345678-1234-1234-1234-1234567890ab",
-    'characteristic_uuid': "abcd1234-5678-90ab-cdef-1234567890ab",
-    'device_name': "ESP32_BLE_RFID",
-    'device_address': None,  # Will be discovered dynamically
-    'connection_timeout': 10.0,
-    'scan_timeout': 5.0,
-    'max_retries': 5,
-    'retry_delay': 3.0
-}
+def check_dependencies():
+    """Check if all required dependencies are available"""
+    missing_deps = []
+    bleak_available = False
+    serial_available = False
+    
+    try:
+        import bleak
+        logger.info("[OK] bleak (Bluetooth LE) dependency found")
+        bleak_available = True
+    except ImportError:
+        missing_deps.append("bleak")
+    
+    try:
+        import serial
+        logger.info("[OK] pyserial dependency found")
+        serial_available = True
+    except ImportError:
+        missing_deps.append("pyserial")
+    
+    return missing_deps, bleak_available, serial_available
 
-class RFIDAttendanceSystem:
-    def __init__(self):
-        """Initialize the RFID attendance system"""
+def setup_database_connection():
+    """Setup database connection with proper Flask app context"""
+    try:
+        # Add the backend directory to Python path
+        backend_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'backend')
+        if backend_path not in sys.path:
+            sys.path.insert(0, backend_path)
+        
+        # Import Flask and models
+        from flask import Flask
+        from models import db, Student, Attendance, RFIDScanLog
+        
+        # Create Flask app for database context
+        app = Flask(__name__)
+        
+        # Configure database
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        instance_path = os.path.join(basedir, '..', '..', 'instance')
+        os.makedirs(instance_path, exist_ok=True)
+        db_path = os.path.join(instance_path, 'attendance_system.db')  # Use same DB as backend
+        
+        app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        
+        # Initialize database
+        db.init_app(app)
+        
+        logger.info("[OK] Database connection established")
+        return app, db, Student, Attendance, RFIDScanLog
+        
+    except Exception as e:
+        logger.error(f"[ERROR] Database setup failed: {e}")
+        return None, None, None, None, None
+
+def print_banner():
+    """Print clean banner for RFID system"""
+    print(f"\n{Fore.CYAN}🔍 AttenSync RFID System - Ready{Style.RESET_ALL}")
+    print(f"{Fore.YELLOW}Listening for card taps...{Style.RESET_ALL}\n")
+
+def print_card_detected(rfid_uid, student_name=None, status=None):
+    """Print clean RFID card detection"""
+    if student_name:
+        if status == "success":
+            print(f"{Back.GREEN}{Fore.BLACK} ✅ {student_name} - ATTENDANCE MARKED {Style.RESET_ALL}")
+        elif status == "duplicate":
+            print(f"{Back.YELLOW}{Fore.BLACK} ⚠️  {student_name} - ALREADY PRESENT {Style.RESET_ALL}")
+    else:
+        print(f"{Back.RED}{Fore.WHITE} ❌ UNKNOWN CARD: {rfid_uid} {Style.RESET_ALL}")
+    print()  # Add spacing
+
+class RFIDSystem:
+    """RFID System with BLE communication or demo mode"""
+    
+    def __init__(self, demo_mode=False):
         self.app = None
         self.db = None
-        self.client = None
-        self.is_running = True
-        self.connection_attempts = 0
-        self.total_scans_processed = 0
+        self.Student = None
+        self.Attendance = None
+        self.RFIDScanLog = None
+        self.running = False
+        self.demo_mode = demo_mode
         
-        # Initialize Flask app for database access
-        self._init_flask_app()
+        # ESP32 Configuration
+        self.ESP32_NAME = "ESP32_BLE_RFID"  # Updated to match actual device name
+        self.ESP32_ADDRESS = "D4:8A:FC:C7:CF:72"  # Known address from scan
+        self.ESP32_SERVICE_UUID = "12345678-1234-1234-1234-1234567890ab"
+        self.ESP32_CHARACTERISTIC_UUID = "abcd1234-5678-90ab-cdef-1234567890ab"
         
-        logger.info("🏷️ RFID Attendance System initialized")
-
-    def _init_flask_app(self):
-        """Initialize Flask app context for database operations"""
-        try:
-            self.app = Flask(__name__)
-            self.app.config['SECRET_KEY'] = 'attensync-rfid-key'
-            
-            # Use absolute path for database
-            project_root = os.path.dirname(os.path.abspath(__file__))
-            db_path = os.path.join(project_root, 'instance', 'attensync.db')
-            self.app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
-            self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-            
-            # Initialize database
-            init_database(self.app)
-            self.db = db
-            
-            logger.info("✓ Database connection established")
-            
-            # Test database connectivity
-            with self.app.app_context():
-                student_count = Student.query.count()
-                logger.info(f"📊 Found {student_count} students in database")
-                
-        except Exception as e:
-            logger.error(f"✗ Failed to initialize database: {e}")
-            raise
-
-    async def scan_for_esp32(self):
-        """Scan for ESP32 device and return its address"""
-        logger.info("🔍 Scanning for ESP32 device...")
+        # Demo RFID cards for testing
+        self.demo_rfids = [
+            "1234567890",
+            "0987654321", 
+            "1122334455",
+            "5544332211"
+        ]
         
-        try:
-            devices = await BleakScanner.discover(timeout=ESP32_CONFIG['scan_timeout'])
-            
-            for device in devices:
-                if device.name == ESP32_CONFIG['device_name']:
-                    logger.info(f"✓ Found ESP32: {device.name} ({device.address})")
-                    return device.address
-                    
-            # If exact name not found, look for any device with ESP32 in name
-            for device in devices:
-                if device.name and "ESP32" in device.name.upper():
-                    logger.info(f"✓ Found ESP32-like device: {device.name} ({device.address})")
-                    return device.address
-            
-            logger.warning("⚠️ ESP32 device not found in scan")
-            return None
-            
-        except Exception as e:
-            logger.error(f"✗ Scan error: {e}")
-            return None
-
-    async def connect_to_esp32(self, device_address):
-        """Connect to ESP32 and set up notifications"""
-        try:
-            logger.info(f"🔗 Connecting to ESP32 at {device_address}...")
-            
-            self.client = BleakClient(device_address, timeout=ESP32_CONFIG['connection_timeout'])
-            await self.client.connect()
-            
-            if not self.client.is_connected:
-                raise Exception("Failed to establish connection")
-            
-            logger.info("✓ Connected to ESP32")
-            
-            # Set up notifications
-            logger.info("📡 Setting up RFID notifications...")
-            await self.client.start_notify(
-                ESP32_CONFIG['characteristic_uuid'],
-                self._handle_rfid_notification
-            )
-            
-            logger.info("✓ RFID notifications enabled")
-            return True
-            
-        except Exception as e:
-            logger.error(f"✗ Connection failed: {e}")
-            await self._cleanup_connection()
-            return False
-
-    def _handle_rfid_notification(self, sender, data):
-        """Handle incoming RFID data from ESP32"""
-        try:
-            # Decode RFID tag
-            rfid_tag = data.decode('utf-8').strip()
-            
-            if not rfid_tag:
-                logger.warning("⚠️ Received empty RFID data")
-                return
-            
-            scan_time = datetime.utcnow()
-            self.total_scans_processed += 1
-            
-            logger.info(f"🏷️ RFID Tag Scanned: {rfid_tag}")
-            
-            # Process attendance in Flask app context
-            with self.app.app_context():
-                self._process_attendance(rfid_tag, scan_time)
-                
-        except Exception as e:
-            logger.error(f"✗ Error processing RFID notification: {e}")
-
-    def _process_attendance(self, rfid_tag, scan_time):
-        """Process attendance marking for RFID tag"""
-        try:
-            # Log the scan attempt
-            scan_log = RFIDScanLog(
-                rfid_tag=rfid_tag,
-                scan_time=scan_time,
-                status='processing'
-            )
-            
-            # Find student by RFID tag
-            student = Student.query.filter_by(rfid_tag=rfid_tag, is_active=True).first()
-            
-            if not student:
-                scan_log.status = 'invalid_tag'
-                scan_log.error_message = f'No active student found for RFID tag: {rfid_tag}'
-                self.db.session.add(scan_log)
-                self.db.session.commit()
-                
-                logger.warning(f"⚠️ Unknown RFID tag: {rfid_tag}")
-                return
-            
-            scan_log.student_id = student.id
-            logger.info(f"👤 Student found: {student.full_name} (Roll: {student.roll_number})")
-            
-            # Check if attendance already marked today
-            today = scan_time.date()
-            existing_attendance = Attendance.query.filter_by(
-                student_id=student.id,
-                attendance_date=today
-            ).first()
-            
-            if existing_attendance:
-                scan_log.status = 'already_marked'
-                scan_log.attendance_id = existing_attendance.id
-                scan_log.error_message = f'Attendance already marked as {existing_attendance.status}'
-                self.db.session.add(scan_log)
-                self.db.session.commit()
-                
-                logger.info(f"ℹ️ Attendance already marked for {student.full_name} today ({existing_attendance.status})")
-                return
-            
-            # Mark attendance
-            attendance = Attendance(
-                student_id=student.id,
-                class_id=student.class_id,
-                teacher_id=1,  # System/RFID user
-                attendance_date=today,
-                time_marked=scan_time,
-                status='present',
-                method='rfid',
-                confidence_score=1.0,
-                notes=f'Auto-marked via RFID: {rfid_tag}'
-            )
-            
-            self.db.session.add(attendance)
-            self.db.session.flush()  # Get the attendance ID
-            
-            # Update scan log with success
-            scan_log.status = 'success'
-            scan_log.attendance_id = attendance.id
-            self.db.session.add(scan_log)
-            
-            # Commit all changes
+    async def simulate_rfid_scanning(self):
+        """Simulate RFID card scanning for demo purposes"""
+        logger.info("[DEMO] Simulating RFID card scanning...")
+        logger.info("[DEMO] This is demo mode - no actual hardware required")
+        logger.info("[DEMO] Press Ctrl+C to stop")
+        
+        # Create demo students if they don't exist
+        with self.app.app_context():
+            for i, rfid in enumerate(self.demo_rfids):
+                existing = self.Student.query.filter_by(rfid_uid=rfid).first()
+                if not existing:
+                    student = self.Student(
+                        name=f"Demo Student {i+1}",
+                        student_id=f"DEMO{i+1:03d}",
+                        rfid_uid=rfid
+                    )
+                    self.db.session.add(student)
             self.db.session.commit()
+            logger.info("[DEMO] Demo students created/verified")
+        
+        scan_count = 0
+        while self.running:
+            try:
+                # Wait 5-15 seconds between scans for demo
+                import random
+                wait_time = random.randint(5, 15)
+                await asyncio.sleep(wait_time)
+                
+                # Simulate a random RFID scan
+                rfid_uid = random.choice(self.demo_rfids)
+                logger.info(f"[DEMO] Simulating RFID scan: {rfid_uid}")
+                self.process_rfid_scan(rfid_uid)
+                
+                scan_count += 1
+                if scan_count % 3 == 0:
+                    logger.info(f"[DEMO] {scan_count} scans processed so far...")
+                
+            except Exception as e:
+                logger.error(f"[ERROR] Simulation error: {e}")
+                await asyncio.sleep(5)
+    
+    async def scan_for_esp32(self):
+        """Scan for ESP32 device"""
+        try:
+            from bleak import BleakScanner
             
-            logger.info(f"✅ Attendance marked: {student.full_name} - Present")
-            logger.info(f"📝 Class: {student.class_info.name if student.class_info else 'Unknown'}")
+            logger.info("[SCAN] Scanning for ESP32 RFID device...")
+            devices = await BleakScanner.discover(timeout=10.0)
+            
+            for device in devices:
+                device_name = device.name or ""
+                device_addr = device.address or ""
+                
+                # Check for both name and address match
+                if (device_name and self.ESP32_NAME.lower() in device_name.lower()) or \
+                   (device_addr.upper() == self.ESP32_ADDRESS.upper()):
+                    logger.info(f"[FOUND] ESP32: {device_name} ({device_addr})")
+                    return device
+                    
+            logger.warning("[WARNING] ESP32 RFID device not found")
+            logger.info(f"[INFO] Looking for device name: {self.ESP32_NAME} or address: {self.ESP32_ADDRESS}")
+            return None
             
         except Exception as e:
-            self.db.session.rollback()
-            logger.error(f"✗ Error processing attendance: {e}")
+            logger.error(f"[ERROR] Error scanning for devices: {e}")
+            return None
+    
+    async def connect_and_listen(self, device):
+        """Connect to ESP32 and listen for RFID data"""
+        try:
+            from bleak import BleakClient
             
-            # Log the error
-            try:
-                error_log = RFIDScanLog(
-                    rfid_tag=rfid_tag,
-                    scan_time=scan_time,
-                    status='error',
-                    error_message=str(e)
+            async with BleakClient(device.address) as client:
+                logger.info(f"[CONNECT] Connected to {device.name}")
+                
+                # Get all services and try to find any notification characteristics
+                services = client.services
+                service_count = len(list(services))
+                logger.info(f"[INFO] Found {service_count} services on ESP32")
+                
+                # Try each service and characteristic for notifications
+                for service in services:
+                    logger.info(f"[SERVICE] {service.uuid}")
+                    for char in service.characteristics:
+                        props = list(char.properties)
+                        logger.info(f"  [CHAR] {char.uuid} - {props}")
+                        
+                        # Try to use any characteristic that supports notifications
+                        if 'notify' in props:
+                            try:
+                                logger.info(f"[SETUP] Attempting to setup notifications on {char.uuid}")
+                                
+                                # Setup notification handler
+                                def notification_handler(sender, data):
+                                    try:
+                                        rfid_data = data.decode('utf-8').strip()
+                                        logger.info(f"[RFID] Card detected: {rfid_data}")
+                                        student_name, status = self.process_rfid_scan(rfid_data)
+                                        print_card_detected(rfid_data, student_name, status)
+                                    except UnicodeDecodeError:
+                                        # Handle binary data
+                                        hex_data = data.hex().upper()
+                                        logger.info(f"[RFID] Card detected (hex): {hex_data}")
+                                        student_name, status = self.process_rfid_scan(hex_data)
+                                        print_card_detected(hex_data, student_name, status)
+                                    except Exception as e:
+                                        logger.error(f"[ERROR] Error processing RFID data: {e}")
+                                        print(f"{Fore.RED}❌ Error processing RFID data: {e}{Style.RESET_ALL}")
+                                
+                                # Start notifications
+                                await client.start_notify(char.uuid, notification_handler)
+                                logger.info(f"[SUCCESS] Notifications started on {char.uuid}")
+                                logger.info("[LISTEN] Listening for RFID cards...")
+                                
+                                # Keep connection alive
+                                while self.running:
+                                    await asyncio.sleep(1)
+                                
+                                return  # Exit if successful
+                                
+                            except Exception as e:
+                                logger.warning(f"[SKIP] Could not setup notifications on {char.uuid}: {e}")
+                                continue
+                
+                # If we get here, no working notification characteristic was found
+                logger.error("[ERROR] No working notification characteristics found")
+                logger.info("[INFO] Trying alternative approach - checking all characteristics...")
+                
+                # Try ALL characteristics, even those without notify property
+                for service in services:
+                    for char in service.characteristics:
+                        try:
+                            logger.info(f"[ATTEMPT] Trying {char.uuid}")
+                            
+                            def notification_handler(sender, data):
+                                try:
+                                    rfid_data = data.decode('utf-8').strip()
+                                    logger.info(f"[RFID] Card detected: {rfid_data}")
+                                    student_name, status = self.process_rfid_scan(rfid_data)
+                                    print_card_detected(rfid_data, student_name, status)
+                                except UnicodeDecodeError:
+                                    hex_data = data.hex().upper()
+                                    logger.info(f"[RFID] Card detected (hex): {hex_data}")
+                                    student_name, status = self.process_rfid_scan(hex_data)
+                                    print_card_detected(hex_data, student_name, status)
+                                except Exception as e:
+                                    logger.error(f"[ERROR] Error processing RFID data: {e}")
+                                    print(f"{Fore.RED}❌ Error processing RFID data: {e}{Style.RESET_ALL}")
+                            
+                            await client.start_notify(char.uuid, notification_handler)
+                            logger.info(f"[SUCCESS] Alternative setup successful on {char.uuid}")
+                            logger.info("[LISTEN] Listening for RFID cards...")
+                            
+                            while self.running:
+                                await asyncio.sleep(1)
+                            return
+                            
+                        except Exception as e:
+                            continue
+                
+                logger.error("[ERROR] Could not setup notifications on any characteristic")
+                    
+        except Exception as e:
+            logger.error(f"[ERROR] Connection error: {e}")
+    
+    def process_rfid_scan(self, rfid_uid):
+        """Process RFID scan and update attendance"""
+        if not all([self.app, self.db, self.Student, self.Attendance, self.RFIDScanLog]):
+            logger.error("[ERROR] Database not properly initialized")
+            return None, None
+        
+        try:
+            with self.app.app_context():
+                # Log the scan
+                scan_log = self.RFIDScanLog(
+                    rfid_tag=rfid_uid,  # Changed from rfid_uid to rfid_tag
+                    scan_time=datetime.now(),
+                    status='detected'
                 )
-                self.db.session.add(error_log)
-                self.db.session.commit()
-            except:
-                pass  # Don't cascade errors
-
-    async def run_attendance_system(self):
-        """Main loop for the attendance system"""
-        logger.info("🚀 Starting RFID Attendance System...")
-        logger.info("📍 Press Ctrl+C to stop")
-        
-        while self.is_running:
-            try:
-                self.connection_attempts += 1
-                logger.info(f"🔄 Connection attempt #{self.connection_attempts}")
+                self.db.session.add(scan_log)
                 
-                # Scan for ESP32
-                device_address = await self.scan_for_esp32()
+                # Find student by RFID
+                student = self.Student.query.filter_by(rfid_tag=rfid_uid).first()  # Changed from rfid_uid to rfid_tag
                 
-                if not device_address:
-                    if self.connection_attempts >= ESP32_CONFIG['max_retries']:
-                        logger.error("❌ Maximum connection attempts reached. Exiting...")
-                        break
+                if student:
+                    # Check if already marked present today
+                    today = date.today()
+                    existing_attendance = self.Attendance.query.filter_by(
+                        student_id=student.id,
+                        attendance_date=today  # Changed from date to attendance_date
+                    ).first()
                     
-                    logger.info(f"⏳ Retrying in {ESP32_CONFIG['retry_delay']} seconds...")
-                    await asyncio.sleep(ESP32_CONFIG['retry_delay'])
-                    continue
+                    if existing_attendance:
+                        logger.info(f"[DUPLICATE] {student.full_name} already marked present today")
+                        scan_log.status = 'already_marked'
+                        scan_log.student_id = student.id
+                        scan_log.student_name = student.full_name
+                        self.db.session.commit()  # Commit the scan log
+                        return student.full_name, "duplicate"
+                    else:
+                        # Mark attendance
+                        attendance = self.Attendance(
+                            student_id=student.id,
+                            class_id=student.class_id,
+                            teacher_id=1,  # Default teacher ID - should be configurable
+                            attendance_date=today,
+                            time_marked=datetime.now(),
+                            status='present',
+                            method='rfid'
+                        )
+                        self.db.session.add(attendance)
+                        logger.info(f"[SUCCESS] Attendance marked for {student.full_name}")
+                        scan_log.status = 'success'
+                        scan_log.student_id = student.id
+                        scan_log.student_name = student.full_name
+                        scan_log.attendance_id = attendance.id  # Link the attendance record
+                        self.db.session.commit()  # Commit both attendance and scan log
+                        return student.full_name, "success"
+                else:
+                    logger.warning(f"[UNKNOWN] Unknown RFID card: {rfid_uid}")
+                    scan_log.status = 'invalid_tag'
+                    scan_log.error_message = f'No student found with RFID tag: {rfid_uid}'
+                    self.db.session.commit()  # Commit the scan log even for unknown cards
+                    return None, "unknown"
                 
-                # Connect to ESP32
-                if await self.connect_to_esp32(device_address):
-                    logger.info("🎉 RFID system ready! Waiting for tag scans...")
-                    
-                    # Reset connection attempts on successful connection
-                    self.connection_attempts = 0
-                    
-                    # Keep connection alive and process notifications
-                    try:
-                        while self.is_running and self.client.is_connected:
-                            await asyncio.sleep(0.1)
-                    except asyncio.CancelledError:
-                        logger.info("📋 System shutdown requested")
-                        break
-                    except Exception as e:
-                        logger.error(f"✗ Connection lost: {e}")
-                
-                await self._cleanup_connection()
-                
-                if self.is_running:
-                    logger.info(f"⏳ Reconnecting in {ESP32_CONFIG['retry_delay']} seconds...")
-                    await asyncio.sleep(ESP32_CONFIG['retry_delay'])
-                
-            except KeyboardInterrupt:
-                logger.info("\n🛑 Shutdown requested by user")
-                break
-            except Exception as e:
-                logger.error(f"✗ Unexpected error: {e}")
-                await asyncio.sleep(ESP32_CONFIG['retry_delay'])
-        
-        await self._cleanup_connection()
-        logger.info(f"📊 Total RFID scans processed: {self.total_scans_processed}")
-        logger.info("👋 RFID Attendance System stopped")
-
-    async def _cleanup_connection(self):
-        """Clean up BLE connection"""
-        if self.client:
-            try:
-                if self.client.is_connected:
-                    await self.client.disconnect()
-                logger.info("🔌 Connection cleaned up")
-            except Exception as e:
-                logger.error(f"✗ Cleanup error: {e}")
-            finally:
-                self.client = None
-
-    def stop(self):
-        """Stop the attendance system"""
-        self.is_running = False
-
-# ==================== MAIN EXECUTION ====================
-
-def print_startup_banner():
-    """Print startup banner"""
-    print("╔" + "="*48 + "╗")
-    print("║" + " RFID ATTENDANCE SYSTEM - AttenSync ".center(48) + "║")
-    print("╠" + "="*48 + "╣")
-    print("║" + f" Version: 2.0 | Fresh Database Integration ".ljust(48) + "║")
-    print("║" + f" ESP32 BLE | Auto-Attendance Marking ".ljust(48) + "║")
-    print("╚" + "="*48 + "╝")
-    print()
-
-async def main():
-    """Main function"""
-    print_startup_banner()
+        except Exception as e:
+            logger.error(f"[ERROR] Database error: {e}")
+            if self.db:
+                try:
+                    self.db.session.rollback()
+                except:
+                    pass
+            return None, "error"
     
-    # Initialize system
-    rfid_system = RFIDAttendanceSystem()
+    async def start_system(self):
+        """Start the RFID system"""
+        logger.info("[START] Starting AttenSync RFID System...")
+        
+        # Show colorful banner
+        print_banner()
+        
+        # Check dependencies
+        missing_deps, bleak_available, serial_available = check_dependencies()
+        
+        # Setup database
+        self.app, self.db, self.Student, self.Attendance, self.RFIDScanLog = setup_database_connection()
+        if not self.app:
+            logger.error("[ERROR] Database setup failed")
+            return False
+        
+        # Initialize database tables
+        with self.app.app_context():
+            self.db.create_all()
+            logger.info("[OK] Database tables initialized")
+        
+        self.running = True
+        
+        # If hardware dependencies are missing, offer to run in demo mode
+        if missing_deps:
+            logger.warning(f"[WARNING] Missing dependencies: {', '.join(missing_deps)}")
+            logger.info("[INFO] Hardware dependencies not available")
+            logger.info("[INFO] To install: pip install bleak pyserial")
+            
+            # For now, let's try to install dependencies automatically
+            try:
+                logger.info("[INSTALL] Attempting to install missing dependencies...")
+                import subprocess
+                import sys
+                
+                for dep in missing_deps:
+                    logger.info(f"[INSTALL] Installing {dep}...")
+                    result = subprocess.run([sys.executable, '-m', 'pip', 'install', dep], 
+                                          capture_output=True, text=True)
+                    if result.returncode == 0:
+                        logger.info(f"[SUCCESS] {dep} installed successfully")
+                    else:
+                        logger.error(f"[ERROR] Failed to install {dep}: {result.stderr}")
+                
+                # Re-check dependencies after installation
+                missing_deps, bleak_available, serial_available = check_dependencies()
+                
+            except Exception as e:
+                logger.error(f"[ERROR] Auto-installation failed: {e}")
+        
+        # If we still have missing dependencies, fall back to demo mode
+        if missing_deps:
+            logger.info("[FALLBACK] Running in demo/simulation mode")
+            self.demo_mode = True
+        
+        try:
+            if self.demo_mode or not bleak_available:
+                await self.simulate_rfid_scanning()
+            else:
+                while self.running:
+                    # Scan for ESP32
+                    device = await self.scan_for_esp32()
+                    if device:
+                        await self.connect_and_listen(device)
+                    else:
+                        logger.info("[RETRY] Retrying in 10 seconds...")
+                        await asyncio.sleep(10)
+                    
+        except KeyboardInterrupt:
+            logger.info("[STOP] RFID System stopped by user")
+        except Exception as e:
+            logger.error(f"[ERROR] System error: {e}")
+        finally:
+            self.running = False
+        
+        return True
+
+def main():
+    """Main entry point"""
+    logger.info("[INIT] AttenSync RFID System Starting...")
+    
+    # Try to auto-install dependencies first
+    try:
+        missing_deps, _, _ = check_dependencies()
+        if missing_deps:
+            logger.info("[SETUP] Attempting to install RFID dependencies...")
+            import subprocess
+            import sys
+            
+            # Try installing with different methods
+            for dep in missing_deps:
+                logger.info(f"[INSTALL] Installing {dep}...")
+                
+                # Try pip install first
+                result = subprocess.run([sys.executable, '-m', 'pip', 'install', dep], 
+                                      capture_output=True, text=True)
+                
+                if result.returncode != 0:
+                    # If that fails, try with --user flag
+                    logger.info(f"[INSTALL] Retrying {dep} with --user flag...")
+                    result = subprocess.run([sys.executable, '-m', 'pip', 'install', '--user', dep], 
+                                          capture_output=True, text=True)
+                
+                if result.returncode == 0:
+                    logger.info(f"[SUCCESS] {dep} installed successfully")
+                else:
+                    logger.warning(f"[WARNING] Could not install {dep} - will run in demo mode")
+                    logger.debug(f"Error: {result.stderr}")
+    
+    except Exception as e:
+        logger.error(f"[ERROR] Dependency installation failed: {e}")
+    
+    system = RFIDSystem()
     
     try:
-        # Run the attendance system
-        await rfid_system.run_attendance_system()
+        # Run the async system
+        asyncio.run(system.start_system())
     except KeyboardInterrupt:
-        logger.info("🛑 Interrupted by user")
+        logger.info("[SHUTDOWN] RFID System shutdown")
     except Exception as e:
-        logger.error(f"❌ Fatal error: {e}")
-    finally:
-        rfid_system.stop()
-        logger.info("🏁 System shutdown complete")
+        logger.error(f"[FATAL] Fatal error: {e}")
+        # Print full traceback for debugging
+        import traceback
+        logger.error(traceback.format_exc())
 
-if __name__ == '__main__':
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print("\n👋 Goodbye!")
-    except Exception as e:
-        print(f"❌ Fatal error: {e}")
-        sys.exit(1)
+if __name__ == "__main__":
+    main()

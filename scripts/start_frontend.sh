@@ -2,5 +2,5 @@
 # AttenSync Frontend Startup Script
 
 echo "Starting AttenSync Frontend..."
-cd client
+cd "$(dirname "$0")/../src/frontend"
 npm start

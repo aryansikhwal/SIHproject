@@ -195,6 +195,7 @@ class RFIDScanLog(db.Model):
     rfid_tag = db.Column(db.String(50), nullable=False)
     scan_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=True)  # NULL if invalid tag
+    student_name = db.Column(db.String(100), nullable=True)  # Store student name for quick access
     attendance_id = db.Column(db.Integer, db.ForeignKey('attendance.id'), nullable=True)  # NULL if already marked
     status = db.Column(db.String(20), nullable=False)  # 'success', 'invalid_tag', 'already_marked', 'error'
     error_message = db.Column(db.Text, nullable=True)
@@ -208,9 +209,9 @@ class RFIDScanLog(db.Model):
         return {
             'id': self.id,
             'rfid_tag': self.rfid_tag,
+            'student_name': self.student_name,
             'scan_time': self.scan_time.isoformat() if self.scan_time else None,
             'student_id': self.student_id,
-            'student_name': self.student_info.full_name if self.student_info else None,
             'attendance_id': self.attendance_id,
             'status': self.status,
             'error_message': self.error_message,
@@ -236,6 +237,7 @@ def init_database(app):
             )
             admin.set_password('admin123')
             db.session.add(admin)
+            db.session.commit()  # Commit admin first
             
             # Create a default class
             default_class = Class(
